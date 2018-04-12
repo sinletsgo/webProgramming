@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" name="" value="학생목록" id="button">
+    <ul id="ul">
+
+    </ul>
+  </body>
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  $("#button").click(function(){
+
+  $.ajax({
+    url:'http://localhost/studentObjectArray',
+    type:'GET',
+    data:"",
+    success:function(data){
+      console.log(data);
+      console.log(data[0]);
+      for (var i = 0; i < data.length; i++) {
+        $("#ul").append("<li>" + "이름: "+ data[i].name + "/"
+        + "주소: " + data[i].address + "/"
+        + "전화번호: " + data[i].phoneNumber
+        + "</li>")
+      }
+    }
+  })
+
+
+})
+//
+// // test
+// $.ajax({
+//   url:'http://localhost/testArray',
+//   type:'GET',
+//   data:"",
+//   success:function(data){
+//     console.log(data);
+//     console.log(data[0]);
+//   }
+// })
+
+
+
+  </script>
+</html>

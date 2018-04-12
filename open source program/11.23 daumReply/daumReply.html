@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body id="enter">
+    <input type="button" name="" value="댓글 가져오기" id="button">
+    <h3>文대통령 지지율 73.1%..지진 대처 효과로 4주째 상승세</h3>
+    <ul id="ul">
+    </ul>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  // window.setTimeout('window.location.reload()',1000);
+
+
+
+
+
+
+
+  $("#button").click(function(){
+
+  $.ajax({
+    url:'http://comment.daum.net/apis/v1/posts/26653061/comments?parentId=0&offset=0&limit=30&sort=LATEST',
+    type:'GET',
+    data:"",
+    success:function(data){
+
+      console.log(data);
+      console.log(data[0]);
+
+      //ul 태그 밑에 계속 append 복사해서 붙여넣기 아래로 쭉~ 반복하는것.
+      for (var i = 0; i < data.length; i++) {
+
+        $("#ul").append("<li> <br>"
+        + "작성일시: " + data[i].createdAt + "<br>"
+        + "작성자: "+ data[i].user.displayName + "<br> "
+        + "<댓글내용> <br> " + data[i].content
+        + "</li> <br><br><br>"
+        )
+
+      }
+    }
+
+  })
+
+
+})
+
+
+$("#enter").keydown(function(key){
+  if (key.keyCode==13) {
+    $("#button").click()
+  }
+})
+
+
+
+  </script>
+
+
+
+
+
+</html>

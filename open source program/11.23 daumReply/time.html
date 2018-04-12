@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" name="" value="timer1" id="buttonStart">
+
+    <input type="button" name="" value="timer2" id="buttonStart2">
+    <input type="button" name="" value="timer3" id="buttonStart3">
+    <input type="button" name="" value="stoper" id="buttonEnd">
+
+    <div class="" id="timeArea">
+
+    </div>
+
+    <hr>
+    <h3>정상속도!</h3>
+
+    <div class="" id="test">
+    </div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  // setInterval 일정시간마다 반복 실행하는 함수!
+  // setInterval(function() { ... }, 지연시간);
+  // 1000 = 1초, 60000= 1분
+  // test 란 변수는 멈추기 위해서 넣은것. 없어도 함수 실행은 되니까.
+  var test, timetest=0
+  test=setInterval(function(){
+    $("#test").html(timetest);
+    timetest += 1;
+  },1000);
+
+
+
+  // clearInterval은 setInterval로 작동하고 있는 걸 멈추게 함.
+  // 클릭한것만 작동하며, 각각 독립적으로 시간올라가도록 함.
+
+  var timer, time=0, time2=0, time3=0
+  $("#buttonStart").click(function(){
+    clearInterval(timer);
+    timer=setInterval(function(){
+      $("#timeArea").html(time);
+      time += 0.5;
+    }, 500);
+  });
+
+  $("#buttonEnd").click(function(){
+    clearInterval(timer);
+
+  });
+
+  $("#buttonStart2").click(function(){
+    clearInterval(timer);
+    timer=setInterval(function(){
+      $("#timeArea").html(time2);
+      time2 += 0.5;
+    }, 500);
+  });
+  $("#buttonStart3").click(function(){
+    clearInterval(timer);
+    timer=setInterval(function(){
+      $("#timeArea").html(time3);
+      time3+= 0.5;
+    }, 500);
+  });
+
+
+
+
+  </script>
+</html>

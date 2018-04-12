@@ -1,0 +1,140 @@
+<html>
+<head>
+</head>
+<body>
+학교 <input type="radio" name="place">
+제주도<input type="radio" name="place">
+울릉도<input type="radio" name="place" checked>
+<input type="button" id="getWeather" value="날씨정보" onclick="">
+<div id="chart_div"></div>
+
+</body>
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+
+
+
+
+
+
+	$("#getWeather").click(function(){
+		var lon, lat;
+
+		if(document.getElementsByName('place')[0].checked){
+			lat = 37.549858;
+			lon = 126.842354;
+    }
+    else if(document.getElementsByName('place')[1].checked){
+			lat = 33.382784;
+			lon = 126.531610;
+		}
+    else if(document.getElementsByName('place')[2].checked){
+			lat = 37.507390;
+			lon = 130.842840;
+		}
+		else {
+    	alert("장소를 선택하세요");
+    	return;
+    }
+
+
+
+    $.ajax({
+        url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&lon=' + lon + '&lat=' + lat,
+        headers: {appKey : "2ae376fa-79fe-3fae-909f-41741ef22932"},
+        success:function(data){
+          console.log(data);
+          $("#weatherArea").html("");
+          var temperature = data.weather.forecast6days["0"].temperature
+
+          var temperatureArray= []
+
+          // 배열 0 번에 0,3,4가 들어가는걸 확인
+          temperatureArray[0]=[1,2,3]
+          console.log(temperatureArray[0]);
+
+					//구글 bar chart 이중 사용
+					// 2일차부터 10일차까지 최저, 최고 온도 차트
+					//데이터는 2부터 접근해야하는데, 배열은 0에 넣어야 하니, 아래와 같이 하는것.
+          for(var i=2;i<11;i++){
+            var minDeg = "tmin"+i+"day";
+          	var maxDeg = "tmax"+i+"day";
+          	var amSky = "amName" + i + "day";
+            var pmSky = "pmName" + i + "day";
+
+            // 방법1 선생님
+            temperatureArray[i-2]=[]
+            temperatureArray[i-2][0]= i
+            temperatureArray[i-2][1]= Number(temperature[minDeg])
+            temperatureArray[i-2][2]= Number(temperature[maxDeg])
+
+            // 방법2 나
+						// 배열 1개 만들고, 이중배열로 0번엔 일차, 1번엔 최저, 2번엔 최고온도
+            temperatureArray[i-2]=[i, Number(temperature[minDeg]), Number(temperature[maxDeg])]
+
+
+            // for문 돌리니까, temperatureArray에 배열이 쭉 들어가는것 확인
+            console.log(temperatureArray);
+
+            // $("#weatherArea").append(i + "일후 최저기온 : " + data.weather.forecast6days[0].temperature[minDeg]+"도<br>");
+            // $("#weatherArea").append(i + "일후 최고기온 : " + data.weather.forecast6days[0].temperature[maxDeg]+"도<br>");
+            // $("#weatherArea").append(i + "일후 오전날씨 : " + data.weather.forecast6days[0].sky[amSky]+"<br>");
+            // $("#weatherArea").append(i + "일후 오후날씨 : " + data.weather.forecast6days[0].sky[pmSky]+"<br><br>");
+
+          }
+          console.log(temperatureArray);
+
+
+          google.charts.load('current', {packages: ['corechart', 'line']});
+          google.charts.setOnLoadCallback(drawCurveTypes);
+
+          function drawCurveTypes() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'X');
+                data.addColumn('number', '최저온도');
+                data.addColumn('number', '최고온도');
+                // console.log(temperature.tmin2day);
+                // var minDeg = "tmin2day";
+                // d에 배열 넣고 d를 넣으니 되는걸 확인 그럼 합해서 넣으면 될것같다
+                // var d=[4, 5, 6]
+                // console.log(temperature[minDeg]);
+                data.addRows(temperatureArray
+                 );
+                console.log(temperatureArray[0]);
+                // data.addRows([
+                //   [2, 3, 3],    [3, 4, 3], d
+                // ]);
+
+                var options = {
+                  hAxis: {
+                    title: '일자'
+                  },
+                  vAxis: {
+                    title: '온도'
+                  },
+                  series: {
+                    1: {curveType: 'function'}
+                  }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+              }
+
+
+
+
+        }
+    });
+
+
+
+	});
+
+</script>
+</html>

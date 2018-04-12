@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+  body {
+    background-color: black;
+    color: white;
+  }
+  h1 {color: white;}
+
+  </style>
+  <body>
+    <hr>
+
+    <h3>밥</h3>
+    맨밥(1000원)<input type="radio" name="rice" value="1000"><br>
+    보리밥(3000원)<input type="radio" name="rice" value="3000">
+    비빔밥(5000원)<input type="radio" name="rice" value="5000">
+    <h3>반찬</h3>
+    소고기(2500원)<input type="radio" name="sidedish" value="2500">
+    돼지고기(1000원)<input type="radio" name="sidedish" value="1000">
+    닭고기(1500원)<input type="radio" name="sidedish" value="1500">
+    오리고기(2000원)<input type="radio" name="sidedish" value="2000">
+    <h3>국</h3>
+    미역국(1500원)<input type="radio" name="soup" value="1500">
+    된장국(1000원)<input type="radio" name="soup" value="1000"><br>
+
+    <input type="button" name="" value="계산" onclick="calcu()">
+    총계<input type="text" name="" id="sum" value="">
+
+  </body>
+
+  <script type="text/javascript">
+
+
+
+  var calcu = function(){
+    var riceSum=0
+    var sideSum=0
+    var soupSum=0
+    rice=document.getElementsByName('rice')
+    sidedish=document.getElementsByName('sidedish')
+    soup=document.getElementsByName('soup')
+    // returnCheckPrice 함수 처음 만나면  77번줄로 감.
+    // 그리고 죽고 리턴값이 ricesum에 들어감
+    var riceSum=returnCheckPrice(rice);
+    var sideSum=returnCheckPrice(sidedish);
+    var soupSum=returnCheckPrice(soup);
+    var total=(riceSum+sideSum+soupSum)
+    document.getElementById('sum').value="총가격: "+total
+    // console.log(rice);
+    // for (var i = 0; i < rice.length; i++) {
+    //   if (rice[i].checked==true) {
+    //     riceSum=Number(rice[i].value)
+    //     console.log("밥값 "+riceSum)
+    //   }
+    // }
+    // for (var i = 0; i < sidedish.length; i++) {
+    //   if (sidedish[i].checked==true) {
+    //     sideSum=Number(sidedish[i].value)
+    //     console.log("반찬값 "+sideSum);
+    //   }
+    // }
+    // for (var i = 0; i < soup.length; i++) {
+    //   if (soup[i].checked==true) {
+    //     soupSum=Number(soup[i].value)
+    //     console.log("국값 "+soupSum);
+    //   }
+    // }
+    // var total=(riceSum+sideSum+soupSum)
+    //
+    // document.getElementById('sum').value="총 가격은 "+total+"입니다"
+}
+
+  function returnCheckPrice(a1){
+  for (var i = 0; i < a1.length; i++) {
+    if (a1[i].checked==true) {
+      return (Number(a1[i].value))
+    }
+  }
+}
+//
+//
+
+
+
+
+ // 죽어서 리턴값을 남긴다.
+ // 파라미터(인자)를 넣고, 넘기고
+
+
+
+  </script>
+</html>

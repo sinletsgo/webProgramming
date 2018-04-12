@@ -1,0 +1,86 @@
+<html>
+<head>
+</head>
+<body>
+학교 <input type="radio" name="place">
+제주도<input type="radio" name="place">
+울릉도<input type="radio" name="place">
+<input type="button" id=getWeather value="날씨정보" onclick="">
+<div id="weatherArea" style="display: none">
+    <br><br>
+</div>
+<div id="chart_div"></div>
+</body>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$("#getWeather").click(function(){
+		$("#weatherArea").css({display:""});
+		var lon, lat;
+		if(document.getElementsByName('place')[0].checked){
+			lat = 37.549858;
+			lon = 126.842354;
+    }
+    else if(document.getElementsByName('place')[1].checked){
+			lat = 33.382784;
+			lon = 126.531610;
+		}
+    else if(document.getElementsByName('place')[2].checked){
+			lat = 37.507390;
+			lon = 130.842840;
+		}
+		else {
+        	alert("장소를 선택하세요");
+        	return;
+        }
+        $.ajax({
+            url:'http://apis.skplanetx.com/weather/forecast/6days?lon=' + lon + '&lat=' + lat + '&version=1',
+            headers: {appKey : "e65bc12a-b280-3f80-a84a-be22ba74f66c"},
+            success:function(data){
+	            console.log(data);
+	            var tempByDay = [];
+	            for(var i=2;i<11;i++){
+		            var minDegByDay = "tmin"+i+"day";
+	            	var maxDegByDay = "tmax"+i+"day";
+                tempByDay[i-2] = [];
+		            tempByDay[i-2][0] = i;
+		            tempByDay[i-2][1] = Number(data.weather.forecast6days[0].temperature[minDegByDay]);
+		            tempByDay[i-2][2] = Number(data.weather.forecast6days[0].temperature[maxDegByDay]);
+              }
+
+	            google.charts.load('current', {packages: ['corechart', 'line']});
+	            google.charts.setOnLoadCallback(drawCurveTypes);
+
+	            function drawCurveTypes() {
+		            var chartData = new google.visualization.DataTable();
+		            chartData.addColumn('number', 'X');
+		            chartData.addColumn('number', '최저기온');
+		            chartData.addColumn('number', '최고기온');
+		            chartData.addRows(tempByDay);
+
+
+		            var options = {
+			            hAxis: {
+				            title: 'days later'
+			            },
+			            vAxis: {
+				            title: '도'
+			            },
+			            series: {
+				            1: {curveType: 'function'}
+			            }
+		            };
+
+		            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+		            chart.draw(chartData, options);
+	            }
+
+            }
+        });
+	});
+
+
+
+</script>
+</html>

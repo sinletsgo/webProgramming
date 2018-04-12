@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="date">
+
+    </div>
+    <hr>
+    제주도<input type="radio" name="radio" value="">
+    학교<input type="radio" name="radio" value=""   >
+    <input type="button" name="" value="날씨확인" id="Button">
+
+    <div id="div">
+
+
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+
+
+  // 날짜는 걍 해본거
+  var date1= new Date(2017,10,29);
+  $(".date").html(date1)
+
+  // 1. 변수 데이터에 저장 방법
+  $("#Button").click(function(){
+    var lat, lon
+    if (document.getElementsByName('radio')[0].checked) {
+      lat= 33.500171
+      lon= 126.531289
+    }
+    else if (document.getElementsByName('radio')[1].checked) {
+      lat= 37.549896
+      lon= 126.842262
+    }
+    else {
+      alert("장소 선택하세요")
+    }
+    $.ajax({
+      url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+      +"lat="+ lat +"&lon="+ lon,
+      headers: {
+        appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+      },
+      success:function(data){
+        var text=""
+        console.log(data);
+        console.log(data.weather.forecast6days["0"].temperature.tmin2day);
+        console.log(data.weather.forecast6days["0"].sky.amName2day);
+        var temperature = data.weather.forecast6days["0"].temperature
+        var sky = data.weather.forecast6days["0"].sky
+        // 객체 속성접근법 ''객체.속성'' 도 가능하지만 ''객체["속성"]'' 이렇게도 접근가능
+        // 그러므로 객체.속성 을 접근할때는 변수만들고 변수에 for문 돌려서
+        // 그 값으로 객체[변수] 식으로 데이터 접근하기
+        console.log(temperature["tmin2day"]);
+        for (var i = 2; i < 11; i++) {
+          var tmin = "tmin"+i+"day"
+          var tmax = "tmax"+i+"day"
+          var skyAm = "amName"+i+"day"
+          var skyPm = "pmName"+i+"day"
+          text= text+ i+"일차 최저기온: "+temperature[tmin] +"<br>"
+          +i+"일차 최고기온: " +temperature[tmax] +"<br>"
+          +i+"일차 오전날씨: " +sky[skyAm]+"<br>"
+          +i+"일차 오후날씨: "+sky[skyPm]+"<br><br>"
+
+        }
+        $("#div").html(text)
+      }
+// 아래와 같이 구성 되어있음.
+// temperature
+// {tmax2day : "18" tmax3day : "18" tmax4day : "18" tmax5day : "17" tmax6day : "16" tmax7day : "16" tmax8day : "15" tmax9day : "15" tmax10day : "13" tmin2day : "9" tmin3day : "9" tmin4day : "8" tmin5day : "8" tmin6day : "10" tmin7day : "7" tmin8day : "6"
+// tmin9day : "7" tmin10day : "6" }
+
+
+
+
+  })
+})
+
+
+// 2. append로 해보자
+//
+//   $("#Button").click(function(){
+//
+//     var lat, lon
+//     if (document.getElementsByName('radio')[0].checked) {
+//       lat= 33.500171
+//       lon= 126.531289
+//     }
+//     else if (document.getElementsByName('radio')[1].checked) {
+//       lat= 37.549896
+//       lon= 126.842262
+//     }
+//     $.ajax({
+//       url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+//       +"lat="+ lat +"&lon="+ lon,
+//       headers: {
+//         appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+//       },
+//       success:function(data){
+//
+//         console.log(data);
+//         console.log(data.weather.forecast6days["0"].temperature.tmin2day);
+//         console.log(data.weather.forecast6days["0"].sky.amName2day);
+//         var temperature = data.weather.forecast6days["0"].temperature
+//         var sky = data.weather.forecast6days["0"].sky
+//         console.log(temperature["tmin2day"]);
+//
+//         // apeend 쓸거면 먼저 이전 데이터 초기화 시킨뒤 다시 append!
+//         $("#div").html("")
+//
+//         for (var i = 2; i < 11; i++) {
+//           var tmin = "tmin"+i+"day"
+//           var tmax = "tmax"+i+"day"
+//           var skyAm = "amName"+i+"day"
+//           var skyPm = "pmName"+i+"day"
+//           $("#div").append(i+"일차 최저기온: "+temperature[tmin] +"<br>"
+//           +i+"일차 최고기온: " +temperature[tmax] +"<br>"
+//           +i+"일차 오전날씨: " +sky[skyAm]+"<br>"
+//           +i+"일차 오후날씨: "+sky[skyPm]+"<br><br>")
+//
+//         }
+//       }
+//
+//   })
+// })
+
+  </script>
+</html>

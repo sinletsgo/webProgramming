@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+//
+// // 배열 0-9까지 각방에  각각 1-10까지 숫자 입력
+//   var array = []
+//   for (var i = 0; i < 10; i++) {
+//     array[i] = i+1;
+//   }
+//     console.log(array);
+// // 배열 안에 있는 1-10 숫자 출력
+//   for (var i = 0; i < array.length; i++) {
+//     console.log(array[i]);
+//   }
+// // array.length는 위에 array[] 안에 들어간 배열 만큼 자동으로 길이측정
+
+
+//
+//
+// // 문자 출력
+//   var c=["a","b","c","d","e"]
+//   for (var i = 0; i < c.length ; i++) {
+//     console.log(c[i]);
+//   }
+
+//
+// // 기초 재연습 시작
+//   var array=[];
+//   array[0] ="오";
+//   array[1] ="신";
+//   array[2] ="김";
+//   array[3] ="평";
+//   array[4] ="강";
+//   array[5] ="술";
+//   array[6] ="홍";
+//   array[7] ="노";
+//   array[8] ="김";
+//   array[9] ="허";
+//
+//   var array2=["오", "신","김","평","강","강"
+// ,"홍","노","김","허"]
+//
+//   console.log(array)
+//   console.log(array2)
+//   console.log(array[0])
+//   console.log(array2[1]);
+
+
+
+
+var array = []
+for (var i = 0; i < 10; i++) {
+  array[i] = i+1;
+}
+// 짝수만 출력
+  for (var i = 0; i < array.length; i+=2) {
+    console.log(array[i]);
+  }
+
+console.log("");
+// 짝수만 출력 2,  if 사용
+  for (var i = 0; i < array.length; i++) {
+    if (i%2==0) {
+      console.log(array[i]);
+    }
+}
+
+
+// 다시 0-30 입력 출력
+  var array=[]
+  for (var i = 0; i <= 30; i++) {
+    array[i]=i
+  }
+  console.log(array);
+
+
+  for (var i = 0; i < array.length; i++) {
+    console.log(array[i]);
+  }
+
+// array 값이 2배 증가해서 입력되게.
+  var array=[]
+  for (var i = 0; i <= 30; i++) {
+    array[i]=i*2
+  }
+  console.log(array);
+
+  for (var i = 0; i < array.length; i++) {
+    console.log(array[i]);
+  }
+
+  // 번호 옆에 숫자 붙여서 쭉~
+   var array=[]
+   for (var i = 0; i <= 30; i++) {
+     array[i]="번호"+i
+   }
+   console.log(array);
+
+   for (var i = 0; i < array.length; i++) {
+     console.log(array[i]);
+   }
+
+
+  // 0 = 번호0, 1=번호 11
+  var array=[]
+  for (var i = 0; i <= 30; i++) {
+    array[i]="번호"+i+1
+  }
+  console.log(array);
+
+// 0은 예외 ㅋ 그냥 해봄
+  var array=[]
+  for (var i = 0; i <=30; i++) {
+    if (i==0) {
+      array[i]="번호"+i
+    } else {
+      array[i]="번호"+i+1
+    }
+  }
+  console.log(array);
+
+
+
+
+
+
+
+// 별 array 에 순서대로 더해서 넣기 ㅋㅋ 스스로해냄
+
+  // var array=[]
+  //
+  // for (var i = 0; i < 10; i++) {
+  //   for (var j = 0; j <= i; j++) {
+  //     array[i]= "★"
+  //     for (var c = 0; c < j; c++) {
+  //       array[i] = array[i]+"★"
+  //     }
+  //   }
+  // }
+  // console.log(array);
+  //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+// 차트 좀 더 다양하게 꾸미고, 데이터 추가
+
+var totalData =[]
+var nv  // 현재가
+var hv
+var lv
+setInterval(function(){
+  var h= new Date().getHours()
+  var m =addZero(new Date().getMinutes())
+  function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+  var s =addZero(new Date().getSeconds())
+  var st=""
+  st = h+":"+m+":"+s
+
+    $.ajax({
+      url:'http://localhost/getFinanse',
+      type:'GET',
+      data:"",
+      success:function(data){
+        hv = data.result.areas["0"].datas["0"].hv
+        nv = data.result.areas["0"].datas["0"].nv
+        lv = data.result.areas["0"].datas["0"].lv
+        totalData[totalData.length] = [st,hv,nv,lv]
+        console.log(totalData);
+        if (totalData.length == 10) { //배열 10개가 되면 너무 많으니까
+          totalData=totalData.slice(1,totalData.length)  //0번 배열 잘라 계속 10개 유지
+        }
+        }
+    })
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawCurveTypes);
+
+    function drawCurveTypes() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'X'); //string으로 해주면 문자 가능
+          data.addColumn('number', '고가');
+          data.addColumn('number', '현재가');
+          data.addColumn('number', '저가');
+
+          data.addRows(
+            totalData
+          );
+          var options = {
+            hAxis: {
+              title: 'Time',
+              titleTextStyle: {
+                bold: true,
+                italic: true
+              }
+            },
+            vAxis: {
+              title: '오리온',
+              titleTextStyle: {
+                color: 'red',
+                fontSize: 20,
+                fontName: 'Arial',
+                bold: true,
+                italic: true
+              }
+            },
+            series: {
+              1: {curveType: 'function'}
+            },
+            backgroundColor: '#f1f8e9'
+
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+},1000);
+
+
+
+
+
+
+  </script>
+</html>

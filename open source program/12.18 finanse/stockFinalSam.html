@@ -1,0 +1,281 @@
+<html>
+<head>
+</head>
+<body>
+경과시간 : <span id="timer">0</span><br>
+<input type="button" id="stock0" value="삼성전자" style="width:85px">
+현재수량 : <span id="currentStock0">0</span>
+수량<input type="text" style="width:40px" id="amount0">
+<input type="button" id="buy0" value="매수">
+<input type="button" id="sell0" value="매도">
+가격 : <span id="stockPrice0"></span><span id="upDown0"></span>
+<br>
+<input type="button" id="stock1" value="LG전자" style="width:85px">
+현재수량 : <span id="currentStock1">0</span>
+수량<input type="text" style="width:40px" id="amount1">
+<input type="button" id="buy1" value="매수">
+<input type="button" id="sell1" value="매도">
+가격 : <span id="stockPrice1"></span><span id="upDown1"></span>
+<br>
+<input type="button" id="stock2" value="sk하이닉스" style="width:85px">
+현재수량 : <span id="currentStock2">0</span>
+수량<input type="text" style="width:40px" id="amount2">
+<input type="button" id="buy2" value="매수">
+<input type="button" id="sell2" value="매도">
+가격 : <span id="stockPrice2"></span><span id="upDown2"></span>
+<br>
+<input type="button" id="stock3" value="현대차" style="width:85px">
+현재수량 : <span id="currentStock3">0</span>
+수량<input type="text" style="width:40px" id="amount3">
+<input type="button" id="buy3" value="매수">
+<input type="button" id="sell3" value="매도">
+가격 : <span id="stockPrice3"></span><span id="upDown3"></span>
+<br>
+<input type="button" id="stock4" value="롯데쇼핑" style="width:85px">
+현재수량 : <span id="currentStock4">0</span>
+수량<input type="text" style="width:40px" id="amount4">
+<input type="button" id="buy4" value="매수">
+<input type="button" id="sell4" value="매도">
+가격 : <span id="stockPrice4"></span><span id="upDown4"></span>
+<br>
+현재 잔고 : <span id="currentMoney">100000000</span><br>
+현재 주식가치 : <span id="stockValue"></span><br>
+현재 총자산 : <span id="valueAsset">100000000</span><br>
+<div id="chart_div"></div>
+</body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var arr = [], timer=0, lastPrice = [0,0,0,0,0], currentMoney = 100000000
+        , valueAsset = 100000000, stock = [0,0,0,0,0], currentGraph = 0, graphName = [];
+    for(i=0;i<5;i++){
+    	arr[i] = [];
+    }
+    var getData = setInterval(function(){
+    	for(var i=0;i<5;i++){
+		      ajaxCall(i);
+      }
+      $("#valueAsset").html(valueAsset);
+      timer++;
+	    $("#timer").html(timer);
+	    if(timer==100) {
+        window.location.href = 'http://localhost/stock2';
+	    	//clearInterval(getData);
+      }
+    }, 1000);
+
+    var ajaxCall = function(num) {
+	    $.ajax({
+		    url:'http://localhost/getStockPrice' + num,
+		    success:function(data) {
+			    if(num==0) data = data.split('window.__jindo2_callback._1931(')[1].slice(0,-1);
+			    if(num==1) data = data.split('window.__jindo2_callback._7576(')[1].slice(0,-1);
+          if(num==2) data = data.split('window.__jindo2_callback._4941(')[1].slice(0,-1);
+          if(num==3) data = data.split('window.__jindo2_callback._2347(')[1].slice(0,-1);
+          if(num==4) data = data.split('window.__jindo2_callback._1755(')[1].slice(0,-1);
+          var stockObj = JSON.parse(data);
+			    var currentPrice = Number(stockObj.result.areas[0].datas[0].nv);
+          $("#stockPrice" + num).html(currentPrice);
+          $("#upDown" + num).html("(" + (currentPrice-lastPrice[num]) + ")");
+          if(currentPrice-lastPrice[num]<0){
+            $("#upDown" + num).css({"color":"red"})
+          }
+          else if(currentPrice-lastPrice[num]>0){
+            $("#upDown" + num).css({"color":"blue"})
+          }
+          else{
+            $("#upDown" + num).css({"color":"black"})
+          }
+			    lastPrice[num] = currentPrice;
+			    updateValues();
+			    var tempArr = [];
+          graphName[num] = stockObj.result.areas[0].datas[0].nm;
+			    tempArr[0] = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
+			    tempArr[1] = stockObj.result.areas[0].datas[0].nv;
+			    arr[num].push(tempArr);
+			    drawChart();
+		    }
+	    })
+    }
+
+    var updateValues = function(){
+    	var stockValue=0;
+	    $("#currentMoney").html(currentMoney);
+	    for(i=0;i<5;i++){
+		    stockValue += stock[i]*lastPrice[i];
+	    }
+	    $("#stockValue").html(stockValue);
+
+	    valueAsset = currentMoney + stockValue;
+	    $("#valueAsset").html(valueAsset);
+    }
+
+    $("#stock0").click(function(){
+	    currentGraph = 0;
+    });
+    $("#stock1").click(function(){
+	    currentGraph = 1;
+    });
+    $("#stock2").click(function(){
+	    currentGraph = 2;
+    });
+    $("#stock3").click(function(){
+	    currentGraph = 3;
+    });
+    $("#stock4").click(function(){
+	    currentGraph = 4;
+    });
+
+    $("#buy0").click(function(){
+	    if(Number($("#amount0").val())*lastPrice[0]>currentMoney){
+		    alert("잔액이 부족합니다");
+		    return;
+	    }
+	    else{
+		    stock[0] += Number($("#amount0").val());
+		    $("#currentStock0").html(stock[0]);
+		    currentMoney -= Number($("#amount0").val())*lastPrice[0];
+		    updateValues();
+	    }
+    })
+    $("#sell0").click(function(){
+	    if(Number($("#amount0").val()) > stock[0]){
+		    alert("보유하신 수량 초과입니다")
+		    return;
+	    }
+	    else{
+		    stock[0] -= Number($("#amount0").val());
+		    $("#currentStock0").html(stock[0]);
+		    currentMoney += Number($("#amount0").val())*lastPrice[0];
+		    updateValues();
+	    }
+    })
+
+    $("#buy1").click(function(){
+	    if(Number($("#amount1").val())*lastPrice[1]>currentMoney){
+		    alert("잔액이 부족합니다");
+		    return;
+	    }
+	    else{
+		    stock[1] += Number($("#amount1").val());
+		    $("#currentStock1").html(stock[1]);
+		    currentMoney -= Number($("#amount1").val())*lastPrice[1];
+		    updateValues();
+	    }
+    })
+    $("#sell1").click(function(){
+	    if(Number($("#amount1").val()) > stock[1]){
+		    alert("보유하신 수량 초과입니다")
+		    return;
+	    }
+	    else{
+		    stock[1] -= Number($("#amount1").val());
+		    $("#currentStock1").html(stock[1]);
+		    currentMoney += Number($("#amount1").val())*lastPrice[1];
+		    updateValues();
+	    }
+    })
+
+    $("#buy2").click(function(){
+	    if(Number($("#amount2").val())*lastPrice[2]>currentMoney){
+		    alert("잔액이 부족합니다");
+		    return;
+	    }
+	    else{
+		    stock[2] += Number($("#amount2").val());
+		    $("#currentStock2").html(stock[2]);
+		    currentMoney -= Number($("#amount2").val())*lastPrice[2];
+		    updateValues();
+	    }
+    })
+    $("#sell2").click(function(){
+	    if(Number($("#amount2").val()) > stock[2]){
+		    alert("보유하신 수량 초과입니다")
+		    return;
+	    }
+	    else{
+		    stock[2] -= Number($("#amount2").val());
+		    $("#currentStock2").html(stock[2]);
+		    currentMoney += Number($("#amount2").val())*lastPrice[2];
+		    updateValues();
+	    }
+    })
+
+    $("#buy3").click(function(){
+	    if(Number($("#amount3").val())*lastPrice[3]>currentMoney){
+		    alert("잔액이 부족합니다");
+		    return;
+	    }
+	    else{
+		    stock[3] += Number($("#amount3").val());
+		    $("#currentStock3").html(stock[3]);
+		    currentMoney -= Number($("#amount3").val())*lastPrice[3];
+		    updateValues();
+	    }
+    })
+    $("#sell3").click(function(){
+	    if(Number($("#amount3").val()) > stock[3]){
+		    alert("보유하신 수량 초과입니다")
+		    return;
+	    }
+	    else{
+		    stock[3] -= Number($("#amount3").val());
+		    $("#currentStock3").html(stock[3]);
+		    currentMoney += Number($("#amount3").val())*lastPrice[3];
+		    updateValues();
+	    }
+    })
+
+    $("#buy4").click(function(){
+	    if(Number($("#amount4").val())*lastPrice[4]>currentMoney){
+		    alert("잔액이 부족합니다");
+		    return;
+	    }
+	    else{
+		    stock[4] += Number($("#amount4").val());
+		    $("#currentStock4").html(stock[4]);
+		    currentMoney -= Number($("#amount4").val())*lastPrice[4];
+		    updateValues();
+	    }
+    })
+    $("#sell4").click(function(){
+	    if(Number($("#amount4").val()) > stock[4]){
+		    alert("보유하신 수량 초과입니다")
+		    return;
+	    }
+	    else{
+		    stock[4] -= Number($("#amount4").val());
+		    $("#currentStock4").html(stock[4]);
+		    currentMoney += Number($("#amount4").val())*lastPrice[4];
+		    updateValues();
+	    }
+    })
+
+    var drawChart = function(){
+	    google.charts.load('current', {packages: ['corechart', 'line']});
+	    google.charts.setOnLoadCallback(drawBasic);
+
+	    function drawBasic() {
+
+		    var data = new google.visualization.DataTable();
+		    data.addColumn('string', 'X');
+		    data.addColumn('number', graphName[currentGraph]);
+
+		    data.addRows(arr[currentGraph]);
+
+		    var options = {
+			    hAxis: {
+				    title: 'Time'
+			    },
+			    vAxis: {
+				    title: '원'
+			    }
+		    };
+
+		    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+		    chart.draw(data, options);
+	    }
+    }
+</script>
+</html>

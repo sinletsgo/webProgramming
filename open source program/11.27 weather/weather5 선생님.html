@@ -1,0 +1,58 @@
+<html>
+<head>
+</head>
+<body>
+학교 <input type="radio" name="place">
+제주도<input type="radio" name="place">
+울릉도<input type="radio" name="place">
+<input type="button" id="getWeather" value="날씨정보" onclick="">
+<div id="weatherArea">
+    <br><br>
+</div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$("#getWeather").click(function(){
+		var lon, lat;
+
+		if(document.getElementsByName('place')[0].checked){
+			lat = 37.549858;
+			lon = 126.842354;
+    }
+    else if(document.getElementsByName('place')[1].checked){
+			lat = 33.382784;
+			lon = 126.531610;
+		}
+    else if(document.getElementsByName('place')[2].checked){
+			lat = 37.507390;
+			lon = 130.842840;
+		}
+		else {
+    	alert("장소를 선택하세요");
+    	return;
+    }
+
+    $.ajax({
+        url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&lon=' + lon + '&lat=' + lat,
+        headers: {appKey : "1e46bb81-8f62-3356-a127-58649ca259fc"},
+        success:function(data){
+          console.log(data);
+          $("#weatherArea").html("");
+          for(var i=2;i<11;i++){
+            var minDeg = "tmin"+i+"day";
+          	var maxDeg = "tmax"+i+"day";
+          	var amSky = "amName" + i + "day";
+            var pmSky = "pmName" + i + "day";
+            $("#weatherArea").append(i + "일후 최저기온 : " + data.weather.forecast6days[0].temperature[minDeg]+"도<br>");
+            $("#weatherArea").append(i + "일후 최고기온 : " + data.weather.forecast6days[0].temperature[maxDeg]+"도<br>");
+            $("#weatherArea").append(i + "일후 오전날씨 : " + data.weather.forecast6days[0].sky[amSky]+"<br>");
+            $("#weatherArea").append(i + "일후 오후날씨 : " + data.weather.forecast6days[0].sky[pmSky]+"<br><br>");
+          }
+
+        }
+    });
+
+	});
+
+</script>
+</html>

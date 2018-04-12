@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+       #panel {
+        position: absolute;
+        top: 15px;
+        left: 30%;
+        background-color: white;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 10px;
+        padding-left: 10px;
+
+      }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps direction!</h3>
+    <div id="panel">
+
+    출발지: <select id="start">
+      <option value="0">집</option>
+      <option value="1">학교</option>
+      <option value="2">광화문역</option>
+      <option value="3">신촌역</option>
+      <option value="4">종로역</option>
+      <option value="5">강남역</option>
+      <option value="6">잠실역</option>
+      <option value="7">신림역</option>
+      <option value="8">용산역</option>
+    </select>
+    <!-- 출발지: <select >
+      <option name="start" >집</option>
+      <option name="start" selected>학교</option>
+      <option name="start">광화문역</option>
+      <option name="start">신촌역</option>
+      <option name="start">종로역</option>
+      <option name="start">강남역</option>
+      <option name="start">잠실역</option>
+      <option name="start">신림역</option>
+      <option name="start">용산역</option>
+    </select> -->
+    도착지: <select id="end">
+      <option value="0" >집</option>
+      <option value="1" selected>학교</option>
+      <option value="2" >광화문역</option>
+      <option value="3" >신촌역</option>
+      <option value="4">종로역</option>
+      <option value="5">강남역</option>
+      <option value="6">잠실역</option>
+      <option value="7">신림역</option>
+      <option value="8">용산역</option>
+    </select>
+
+    <input type="button" value="길찾기" id="setRoute" > <br><br>
+    </div>
+    <div id="map"></div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+
+
+
+    // 샘플 service - directionsService 체험해보기 initmap 내용 복사
+    // calculateAndDisplayRoute 부분도 복사
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: {lat: 37.549846, lng: 126.842286}
+        });
+        directionsDisplay.setMap(map);
+
+
+        console.log(document.getElementById('end'));
+        console.log(document.getElementById('end').value);
+        console.log( $("#end").val() );
+
+        var LatLng =[
+          {lat: 37.508834, lng: 126.891282},
+          {lat: 37.549846, lng: 126.842286},
+          {lat: 37.570892, lng: 126.976541},
+          {lat: 37.555103, lng: 126.936853},
+          {lat: 37.570503, lng: 126.992173},
+          {lat: 37.498227, lng: 127.027617},
+          {lat: 37.513355, lng: 127.100101},
+          {lat: 37.484354, lng: 126.929622},
+          {lat: 37.530009, lng: 126.964764}
+        ]
+
+        console.log(LatLng[0]);
+
+
+        $("#setRoute").click(function(){
+          var origin
+          var destination
+
+
+          if ( $("#start").val() == $("#end").val() ) {
+            alert("출발지와 도착지가 같을 수 없습니다")
+            return; // 끝냄~
+          }
+          else {
+            origin = LatLng[$("#start").val()]
+            destination = LatLng[$("#end").val()]
+          }
+
+          // 굳이 for문 if문 돌릴 필요가 없음. 어차피 select 선택값은 1개뿐, 그 값만 가져오면 끝이니까.
+          // else {
+          //   for (var i = 0; i < LatLng.length; i++) {
+          //
+          //     if ($("#start").val() == i) {
+          //       origin = LatLng[i]
+          //     }
+          //     else if ($("#end").val() == i) {
+          //       destination = LatLng[i]
+          //     }
+          //
+          //   }
+          //
+          // }
+          //
+
+
+
+
+
+          // var origin
+          // var destination
+          // if (document.getElementsByName('start')[0].selected) {
+          //   origin = {lat: 37.508834, lng: 126.891282} //집
+          // }
+          // else if (document.getElementsByName('start')[1].selected) {
+          //   origin = {lat: 37.549846, lng: 126.842286} //학교
+          // }
+          // else if (document.getElementsByName('start')[2].selected) {
+          //   origin = {lat: 37.570892, lng: 126.976541} //광화문
+          // }
+          // else if (document.getElementsByName('start')[3].selected) {
+          //   origin = {lat: 37.555103, lng: 126.936853} //신촌
+          // }
+          // else if (document.getElementsByName('start')[4].selected) {
+          //   origin = {lat: 37.570503, lng: 126.992173} //종로
+          // }
+          // else if (document.getElementsByName('start')[5].selected) {
+          //   origin = {lat: 37.498227, lng: 127.027617} //강남
+          // }
+          // else if (document.getElementsByName('start')[6].selected) {
+          //   origin = {lat: 37.513355, lng: 127.100101} //잠실
+          // }
+          // else if (document.getElementsByName('start')[7].selected) {
+          //   origin = {lat: 37.484354, lng: 126.929622} //신림
+          // }
+          // else if (document.getElementsByName('start')[8].selected) {
+          //   origin = {lat: 37.530009, lng: 126.964764} //용산
+          // }
+          // console.log(origin);
+          //
+          // if (document.getElementsByName('destination')[0].selected) {
+          //   destination = {lat: 37.508834, lng: 126.891282} //집
+          // }
+          // else if (document.getElementsByName('destination')[1].selected) {
+          //   destination = {lat: 37.549846, lng: 126.842286} //학교
+          // }
+          // else if (document.getElementsByName('destination')[2].selected) {
+          //   destination = {lat: 37.570892, lng: 126.976541} //광화문
+          // }
+          // else if (document.getElementsByName('destination')[3].selected) {
+          //   destination = {lat: 37.555103, lng: 126.936853} //신촌
+          // }
+          // else if (document.getElementsByName('destination')[4].selected) {
+          //   destination = {lat: 37.570503, lng: 126.992173} //종로
+          // }
+          // else if (document.getElementsByName('destination')[5].selected) {
+          //   destination = {lat: 37.498227, lng: 127.027617} //강남
+          // }
+          // else if (document.getElementsByName('destination')[6].selected) {
+          //   destination = {lat: 37.513355, lng: 127.100101} //잠실
+          // }
+          // else if (document.getElementsByName('destination')[7].selected) {
+          //   destination = {lat: 37.484354, lng: 126.929622} //신림
+          // }
+          // else if (document.getElementsByName('destination')[8].selected) {
+          //   destination = {lat: 37.530009, lng: 126.964764} //용산
+          // }
+          //
+          // console.log(destination);
+          // origin = LatLng[0]
+          console.log(origin);
+          console.log(destination);
+
+          calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination)
+        })
+
+
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay, start, dest) {
+       directionsService.route({
+
+         origin: start,
+         destination: dest,
+         // origin: document.getElementById('start').value,
+         // destination: document.getElementById('end').value,
+
+         travelMode: 'TRANSIT'   //DRIVING에서 TRANSIT()대중교통)으로 바꿈
+       }, function(response, status) {
+         console.log(response);
+         console.log(status);
+         if (status === 'OK') {
+           directionsDisplay.setDirections(response);
+         } else {
+           window.alert('Directions request failed due to ' + status); //여긴 모든 오류값 나옴 위에서 출발지,도착지를 걸러야
+         }
+       });
+
+      }
+    }
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAosw_HzMGD_qYxywTWHF8jkRZFi26eTfM&callback=initMap">
+    </script>
+  </body>
+</html>

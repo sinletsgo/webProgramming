@@ -1,0 +1,208 @@
+<html>
+<head>
+</head>
+<body>
+<h3>학교 제주도 을릉도
+<input type="button" id="getWeather" value="날씨정보" onclick="">
+</h3>
+<div id="chart_div"></div>
+</body>
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+// var jeju=[]
+// $.ajax({
+// 	url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+// 	+ "lat=" + 33.382784 + "&lon=" + 126.531610,
+// 	headers: {
+// 		appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+// 	},
+// 	success: function(data) {
+// 		jeju[0]=data.weather.minutely[0].station.name
+// 		jeju[1]=Number(data.weather.minutely["0"].temperature.tmin)
+// 		jeju[2]=Number(data.weather.minutely["0"].temperature.tmax)
+// 		console.log(jeju);
+// 	}
+//
+// 	});
+
+	// console.log(jeju[0]);  //왜 여기서 concole 찍으면 못가져올까?..
+  // ajax 는 비동기식, 우선 서버에 요청을 보낸다.  컴퓨터는 순서대로 엄청빠르게 밑으로 처리해내려가는데,
+  // ajax 호출하고 응답을 기다리는게 아니라, 우선 보내놓고 빠르게 내려간다
+  // 그 순간애 ajax 요청보내서 받아서 처리하기 전에 이미 컴퓨터는 console 찍기에, 못가져오는것,
+  // 그래서 위에 setTimeout 함수에서 보듯 1초후에 찍으라고 하면 그때는 응답받은걸 찍을 수 있는것.
+	// setTimeout(function(){
+	// 	console.log(jeju[0])
+	// }, 1000);
+
+
+	$("#getWeather").click(function(){
+		// console.log(jeju[0]);   //여기서 찍으면 가져오네
+
+	var count=0;
+	var gangseo=[] //전역변수로 지정, ajax 내 데이터 넣으면 전역에서 불러오기 가능
+		$.ajax({
+		  url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+		  + "lat=" + 37.549858 + "&lon=" + 126.842354,
+		  headers: {
+		    appKey: "602301f6-fd56-3bf9-bcf7-f884ce484040"
+		  },
+		  success: function(data) {
+				gangseo[0]=data.weather.minutely[0].station.name
+				gangseo[1]=Number(data.weather.minutely["0"].temperature.tmin)
+				gangseo[2]=Number(data.weather.minutely["0"].temperature.tmax)
+				console.log(gangseo);
+				count++;       //count를 어디서 먼저 받아오든 올리고 올려서 3이 먼저 되는 곳이 drawChart 함수실행!
+				if(count==3){
+					drawChart();
+				}
+					console.log(count);
+		}
+		});
+
+	var jeju=[]
+		$.ajax({
+			url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+			+ "lat=" + 33.382784 + "&lon=" + 126.531610,
+			headers: {
+				appKey: "602301f6-fd56-3bf9-bcf7-f884ce484040"
+			},
+			success: function(data) {
+				jeju[0]=data.weather.minutely[0].station.name
+				jeju[1]=Number(data.weather.minutely["0"].temperature.tmin)
+				jeju[2]=Number(data.weather.minutely["0"].temperature.tmax)
+				console.log(jeju);
+				count++;     //count를 어디서 먼저 받아오든 올리고 올려서 3이 먼저 되는 곳이 drawChart 함수실행!
+				if(count==3){
+					drawChart();
+				}
+					console.log(count);
+			}
+
+			});
+
+	var ulle=[]
+		$.ajax({
+			url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+			+ "lat=" + 37.507390 + "&lon=" + 130.842840,
+			headers: {
+				appKey: "602301f6-fd56-3bf9-bcf7-f884ce484040"
+			},
+			success: function(data) {
+				ulle[0]=data.weather.minutely[0].station.name
+				ulle[1]=Number(data.weather.minutely["0"].temperature.tmin)
+				ulle[2]=Number(data.weather.minutely["0"].temperature.tmax)
+				console.log(ulle);
+				count++;     //count를 어디서 먼저 받아오든 올리고 올려서 3이 먼저 되는 곳이 drawChart 함수실행!
+				if(count==3){
+					drawChart();
+				}
+					console.log(count);
+			}
+		});
+
+
+
+
+
+	var drawChart= function(){
+
+	var total=[]
+	total[0]=['City', 'Min Temperature', 'Max Temperature']
+	total[1]=gangseo
+	total[2]=jeju
+	total[3]=ulle
+	console.log(total);
+
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawMultSeries);
+
+	function drawMultSeries() {
+		var data = google.visualization.arrayToDataTable(
+			total
+		);
+
+	// function drawMultSeries() {
+  //   var data = google.visualization.arrayToDataTable([
+  //     ['City', '2010 Population', '2000 Population'],
+  //     ['New York City, NY', 8175000, 8008000],
+  //     ['Los Angeles, CA', 3792000, 3694000],
+  //     ['Chicago, IL', 2695000, 2896000],
+  //
+  //   ]);
+
+
+
+		var options = {
+			title: '지역별 최고, 최저기온',
+			chartArea: {width: '50%'},
+			hAxis: {
+				title: '기온',
+				minValue: 0
+			},
+			vAxis: {
+				title: '도시명'
+			}
+		};
+
+		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
+	}
+
+}
+
+
+
+
+
+// setTimeout 안좋은 방법, 1초 후에도 안오면 또 못 불러오는것, 무결성필요. 비가오던 눈이오던 서버느려져도 불러올 수 있어야.
+
+	// setTimeout(function(){
+  //
+	// 	var total=[]
+	// 	total[0]=['City', 'Min Temperature', 'Max Temperature']
+	// 	total[1]=gangseo
+	// 	total[2]=jeju
+	// 	total[3]=ulle
+	// 	console.log(total);
+  //
+	// 	google.charts.load('current', {packages: ['corechart', 'bar']});
+	// 	google.charts.setOnLoadCallback(drawMultSeries);
+  //
+	// 	function drawMultSeries() {
+	// 		var data = google.visualization.arrayToDataTable(
+	// 			total
+	// 		);
+  //
+	// 		var options = {
+	// 			title: '지역별 최고, 최저기온',
+	// 			chartArea: {width: '50%'},
+	// 			hAxis: {
+	// 				title: '기온',
+	// 				minValue: 0
+	// 			},
+	// 			vAxis: {
+	// 				title: '도시명'
+	// 			}
+	// 		};
+  //
+	// 		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+	// 		chart.draw(data, options);
+	// 	}
+  //
+	// }, 1000);
+
+
+
+
+
+
+
+	});
+
+</script>
+</html>

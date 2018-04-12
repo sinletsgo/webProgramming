@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 600px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <input type="button" name="" value="집" id="home">
+    <input type="button" name="" value="학교" id="school">
+    <input type="button" name="" value="제주도" id="jeju">
+    <input type="button" name="" value="을릉도" id="ule">
+    <input type="button" id="zoomin" value="줌인">
+    <input type="button" id="zoomout" value="줌아웃">
+
+    <br><br>
+    <div id="map"></div>
+
+    </body>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+
+    //
+    // function initMap() { //initMap 함수인데, 실행시키는 함수가 없는데 어떻게? 밑에 스크립트주소에 있다
+    //   var home = {lat: 37.508834, lng: 126.891282};
+    //      //객체다. home에 좌표 위도, 경도
+    //   map = new google.maps.Map(document.getElementById('map'), {
+    //     zoom: 17,   //확대 줌
+    //     center: home
+    //   });
+    //
+    //   marker = new google.maps.Marker({  //지도 마커 설정 영역
+    //     position: home,
+    //     map: map,
+    //     title: "Hello World!"  //추가 시켜봄 ㅎㅎ
+    //   });
+    // }
+
+
+    // marker 바운스! 에니메이션 추가해봄
+
+    function initMap() {
+      var home = {lat: 37.508834, lng: 126.891282};
+         //객체다. home에 좌표 위도, 경도
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,   //확대 줌
+        center: home
+      });
+
+      marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: home,
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        title: "Hello World!"  //추가 시켜봄 ㅎㅎ
+      });
+      marker.addListener('click', toggleBounce);
+    }
+    $("#zoomin").click(function(){
+      map.setZoom(15);
+    });
+    $("#zoomout").click(function(){
+      map.setZoom(8);
+    });
+
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+        }
+        else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
+
+
+
+
+    // 먼저 초기 지도 띄워놓고, map 앞에 var 없애서 전역변수 만들고,
+    // map.panTo 지도 이동, map.setZoom() 지도 줌 조정, marker.setMap(Null) 마커지우기
+    // 이런 내장된? 함수 사용해서 제어하면 되네. 신기하다
+
+
+
+
+    // 아이콘을 이미지로 바꿔봄 ㅋ
+    $("#home").click(function(){
+      marker.setMap(null) //이전 marker 지우고 여기 marker만 표시!
+      map.panTo({lat: 37.508834, lng: 126.891282})
+      map.setZoom(17)
+      var image = 'https://s-media-cache-ak0.pinimg.com/originals/71/4d/c2/714dc2d5cc2f8df83ccc0f4a39d7d2b3.gif'
+      marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: {lat: 37.508834, lng: 126.891282},
+        map: map,
+        icon: image
+      });
+      marker.addListener('click', toggleBounce); //클릭하면 바운스!
+
+    })
+
+    // $("#home").click(function(){
+    //   marker.setMap(null) //이전 marker 지우고 여기 marker만 표시!
+    //   map.panTo({lat: 37.508834, lng: 126.891282})
+    //   map.setZoom(17)
+    //   marker = new google.maps.Marker({  //지도 마커 설정 영역
+    //     position: {lat: 37.508834, lng: 126.891282},
+    //     map: map
+    //
+    //   });
+    //   marker.addListener('click', toggleBounce); //클릭하면 바운스!
+    //
+    // })
+
+
+
+    $("#school").click(function(){
+      marker.setMap(null)
+      map.panTo({lat: 37.549846, lng: 126.842286})
+      map.setZoom(17)
+      marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: {lat: 37.549846, lng: 126.842286},
+        map: map
+      });
+
+      marker.addListener('click', toggleBounce);
+
+    })
+
+
+    $("#jeju").click(function(){
+      var jeju = {lat: 33.422097, lng: 126.549790}  //변수 사용. 이렇게도 해보기
+      marker.setMap(null)
+      map.panTo(jeju)
+      map.setZoom(11)
+      marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: jeju,
+        map: map
+      });
+
+    })
+
+    $("#ule").click(function(){
+      var ule = {lat: 37.510452, lng: 130.856381}
+      marker.setMap(null)
+      map.panTo(ule)
+      map.setZoom(13)
+      marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: ule,
+        map: map
+      });
+
+    })
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAosw_HzMGD_qYxywTWHF8jkRZFi26eTfM&callback=initMap">
+    </script>
+
+    <!-- script async defer 코드 때문에, 지도를 우선 띄우지않으면, 에러난다. 그래서 지도가 없다가, 버튼 클릭시 나타나게 하는게 안되네  -->
+    <!-- 그러므로 우선 전역으로 저 initMap 함수를 실행시켜 지도를 띄워놓고 시작해야하는것. ,  -->
+    <!-- uluru 아니여도, center, position 좌표 직접 넣어줘도 됨   -->
+    <!-- function initMap() {
+      var uluru = {lat: -25.363, lng: 131.044};    //객체다. 우룰루에 좌표 위도, 경도
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,   //확대 줌
+        center: {lat: 37.549846, lng: 126.842286}
+      });
+      var marker = new google.maps.Marker({  //지도 마커 설정 영역
+        position: {lat: 37.549846, lng: 126.842286},
+        map: map
+      }); -->
+
+</html>
+<!-- google map api
+구글 지도 웹
+javascript api
+마커가 포함된 지도 생성
+체험해보기에서 your app key 빨간색  로그인 후
+따라하다가, 왼쪽 사용자인증 정보에서 api 생성 클릭 후
+브라우저 <- 버튼 꾹 눌러 '마커가 포함된 지도' 생성으로 간뒤 다시 app key 누르고 삽입 클릭
+근데 안드로이드로 가져와서
+소스만 html로 가져오고
+브라우저 우측 상단 '키 가져오기' 키 복사해서 html 내에 you app key 에 넣기
+(js 패들로 열어놨더니, 에러떠서 안됬음 중복되서 그런듯)
+
+
+
+ -->

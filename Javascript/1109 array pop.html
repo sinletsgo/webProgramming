@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+// array1.pop()  ()안에 아무것도 안넣어도 됨. 맨끝 값 뺴주는것.
+// pop 해보기전에 데이터가 필요
+
+  var array1=[]
+  var array2=[]
+
+  for (var i = 0; i <= 10; i++) {
+    array1.push(i)
+    array2.push(i*2)
+  }
+  console.log(array1);
+  console.log(array2);
+
+
+
+
+
+
+  // console.log(array1);
+  // push로 이미 array에 입력된 값이 있음. 그 상태에서 pop으로 뺴서 출력
+  // 1. 10,9,8,7,6,5,4,3,2,1 출력
+  // 2. 20,18,16,14,12,10,8..... 출력
+
+  for (var i = 0; i < 10; i++) {
+    console.log(array1.pop());
+  }
+
+  for (var i = 0; i < 10; i++) {
+    console.log(array2.pop());
+  }
+
+
+
+
+
+  </script>
+
+</html>

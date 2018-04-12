@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+
+  </style>
+  <body>
+    <div>
+      <img src="https://pbs.twimg.com/profile_images/2538767984/profile.png" id="im" alt="" width="200">
+
+    </div>
+    <input type="text" id="name1" placeholder="숫자 입력"><br>
+    <input type="text" id="name2" placeholder="숫자 입력"><br>
+    <input type="text" id="name3" placeholder="숫자 입력">
+    <input type="button" name="" value="곱셈" id="button" onclick="document.getElementById('im').
+    src='https://pbs.twimg.com/profile_images/745938977413201920/-OV6pONi.jpg'">  <br><br>
+
+    <input type="text" name="" value="" id="result"> <br>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+
+
+
+  $("#button").click(function(){
+    console.log($('#im'));
+    console.log(document.getElementById('im'));
+    var preUrl = 'http://localhost/mul?number1='+$("#name1").val()
+    +'&number2='+$("#name2").val()
+    +'&number3='+$("#name3").val();
+    // console.log(preUrl)
+    $.ajax({
+      url:preUrl,
+      success:function(data){
+        console.log(data);
+
+        $("#result").val(data)
+      }
+    })
+  })
+
+
+
+
+  $("#name3").keydown(function(key){
+    if (key.keyCode==13) {
+      $("#button").click()
+    }
+  })
+
+
+  </script>
+</html>

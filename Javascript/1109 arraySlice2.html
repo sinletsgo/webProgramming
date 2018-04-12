@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+
+// 10, 10 20 , 10 20 30 , ........10,20,30,40... 10,20,30,40,50,60,70,80,90,100 출력
+// for문 Slice 활용
+  var array=[]
+  for (var i = 0; i < 10; i++) {
+
+    array[i]=(i*10)+10
+  }
+  console.log(array);
+
+  // var array=[10,20,30,40,50,60,70,80,90,100]
+
+  var SliceArray1=[]
+  var SliceArray2=[]
+  var SliceArray3=[]
+
+  // SliceArray1= array.slice()
+  // console.log(SliceArray1);
+ // slice는 복사해서 붙여넣기라서, 담는 그릇 필요
+ // slice(시작, 시작부터 몇번째까지 10까지면 -1 = 9까지)
+
+  for (var i = 0; i <= 10; i++) {
+    console.log(array.slice(0,i));
+  }
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+</html>

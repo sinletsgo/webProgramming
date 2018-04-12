@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+  var array2D=[]
+  var array2D2=[]
+  var array2D3=[]
+
+// 1 방만들기. 5개 방마다 또 방
+  for (var i = 0; i < 5; i++) {
+    array2D[i]=[]
+  }
+  console.log(array2D);
+
+// 2
+// 01234
+// 56789...
+
+  for (var i = 0; i < 5; i++) {
+    array2D2[i]=[]
+  }
+
+  var n=0
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+      array2D2[i][j]=n
+      n=n+1
+      }
+    }
+
+  console.log(array2D2);
+
+
+// 3
+// 0,0,0,0,0
+// 0,1,2,3,4
+// 0,2,4,6,8
+// 0,3,6,9,12
+// 0,4,8,12,16
+
+  for (var i = 0; i < 5; i++) {
+    array2D3[i]=[]
+  }
+
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+      array2D3[i][j]=i*j
+      }
+    }
+
+  console.log(array2D3);
+
+
+// 4 true, false, true, false, true....
+// array2D4 방마다 계속 반복
+
+
+  var array2D4=[]
+  for (var i = 0; i < 5; i++) {
+    array2D4[i]=[]
+  }
+  // console.log(array2D4);
+
+
+
+ // 4-1 방법
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+
+      if ((i+j)%2==0 ) {
+        array2D4[i][j]=true
+
+      } else {
+        array2D4[i][j]=false
+      }
+  }
+}
+  console.log(array2D4);
+
+
+// 4-2 방법
+  var flag=true
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+      array2D4[i][j]=flag
+      flag=!flag
+  }
+}
+  console.log(array2D4);
+
+// 4-3 방법
+
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+      array2D4[i][j] = ( ( (i+j) %2)==0);
+  }
+}
+  console.log(array2D4);
+
+
+// 5
+// 0열0행 , 0열1행, 0열2행, 0열3행, 0열4행, 0열5행
+// 1열0행, 1열1행, 1열2행, 1열3행, 1열4행, 1열5행 ...
+// 2열0행....
+  var array2D5=[]
+  for (var i = 0; i < 6; i++) {
+    array2D5[i]=[]
+  }
+  console.log(array2D5);
+
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 6; j++) {
+      array2D5[i][j]=i+"열"+j+"행";
+    }
+  }
+  console.log(array2D5);
+
+
+
+
+// 구구단 . 개인적으로 해본것
+  var array2D6=[]
+  for (var i = 0; i < 8; i++) {
+    array2D6[i]=[]
+  }
+  console.log(array2D6);
+
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 9; j++) {
+      array2D6[i][j]=(i+2)+"*"+(j+1)+"="+((i+2)*(j+1));
+    }
+  }
+  console.log(array2D6);
+
+
+
+
+
+
+
+
+
+  </script>
+</html>

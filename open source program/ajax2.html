@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" value="" id="name" placeholder="이름 입력">
+    <input type="text" name="" value="" id="number" placeholder="번호 입력">
+    <input type="button" name="" value="전송" id="sendData">
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  $("#sendData").click(function(){
+    // queryStringTest?  여기서부터 lastName 이라는 객체?만든것. 그 안에다가
+    // name 박스에서 입력한 값을 넣고, + phone이라는 객체? 에다가 number 박스에서
+    // 입력한값을 넣으라는 말
+    var preUrl = 'http://localhost/queryStringTest?lastName='
+    +$("#name").val() + "&phone=" + $("#number").val();
+    console.log(preUrl)
+    $.ajax({
+      url:preUrl,
+      success:function(data){
+        console.log(data);
+
+      }
+    })
+  })
+
+  </script>
+</html>

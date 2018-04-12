@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>선택한 성별 학생만 받아오기</p>
+    남자<input type="radio" name="gender" value="남">
+    여자<input type="radio" name="gender" value="여">
+    <button type="button" name="button" id="Button">결과</button><br>
+    <!-- <input type="text" name="" value="" id="text"> -->
+    <ol type="1" id="studentsList">
+
+    </ol>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  // // 선생님 설명
+  // $("#Button").click(function(){
+  //   var preurl='http://localhost/getGender?Gender=';
+  //   if (document.getElementsByName('gender')[0].checked==true) {
+  //     preurl+="m";
+  //   }
+  //   else if (document.getElementsByName('gender')[1].checked==true) {
+  //     preurl+="f";
+  //   }
+  //   else {
+  //     alert("성별을 선택하세요")
+  //     return;
+  //     // return 끝내라는것
+  //   }
+  //   $.ajax({
+  //     url:preurl,
+  //     success:function(data){
+  //       for (var i = 0; i < data.length; i++) {
+  //         $("#studentsList").append("<li>" + data[i] + "</li>");
+  //       }
+  //     }
+  //   });
+  // })
+
+
+
+
+
+  // #내가한것
+  $("#Button").click(function(){
+    gender=document.getElementsByName('gender')
+    console.log(gender);
+    genderData=returnGender(gender)
+
+    function returnGender(abc1){
+      for (var i = 0; i < abc1.length; i++) {
+        if (abc1[i].checked==true) {
+          return abc1[i].value
+        }
+        }
+      }
+
+    $.ajax({
+      url:'http://localhost/getGender?Gender='+genderData,
+      type:'GET',
+      data:"",
+      success:function(data){
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          $("#studentsList").append("<li>" + data[i] +"</li>")
+        }
+        // $("#text").val(data)
+        }
+      }
+    )
+  })
+
+
+
+
+  </script>
+</html>

@@ -1,0 +1,232 @@
+<html>
+<head>
+</head>
+<body>
+<h3>학교 제주도 을릉도
+<input type="button" id="getWeather" value="날씨정보" onclick="">
+</h3>
+
+<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+
+</body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+
+$("#getWeather").click(function(){
+
+var count =0;
+var gangseo = []
+$.ajax({
+	url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+	+"lon="+ 126.842354 + '&lat=' + 37.549858,
+	headers: {appKey : "602301f6-fd56-3bf9-bcf7-f884ce484040"},
+	success:function(data){
+		console.log(data);
+		var minDeg =[]
+		for (var i = 2; i < 11; i++) {
+			minDeg="tmin"+i+"day"
+			gangseo[i-2]=Number([data.weather.forecast6days["0"].temperature[minDeg]])
+		}
+		console.log(gangseo);
+		count++
+		console.log(count);
+		if (count==3) {
+			Chart()
+		}
+	}
+});
+
+
+var jeju= []
+$.ajax({
+	url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+	+"lon="+ 126.531610 + '&lat=' + 33.382784,
+	headers: {appKey : "602301f6-fd56-3bf9-bcf7-f884ce484040"},
+	success:function(data){
+		console.log(data);
+		var minDeg =[]
+		for (var i = 2; i < 11; i++) {
+			minDeg="tmin"+i+"day"
+			jeju[i-2]=Number([data.weather.forecast6days["0"].temperature[minDeg]])
+		}
+		console.log(jeju);
+		count++
+		console.log(count);
+		if (count==3) {
+			Chart()
+		}
+	}
+});
+
+
+var ule = []
+$.ajax({
+	url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+	+"lon="+ 130.842840 + '&lat=' + 37.507390,
+	headers: {appKey : "602301f6-fd56-3bf9-bcf7-f884ce484040"},
+	success:function(data){
+		console.log(data);
+		var minDeg =[]
+		for (var i = 2; i < 11; i++) {
+			minDeg="tmin"+i+"day"
+			ule[i-2]=Number([data.weather.forecast6days["0"].temperature[minDeg]])
+		}
+		console.log(ule);
+		count++
+		console.log(count);
+		if (count==3) {
+			Chart()
+		}
+
+	}
+});
+
+
+
+
+function Chart(){
+
+console.log(gangseo);
+console.log(gangseo[0]);
+
+var total =[]
+	for (var i = 2; i < 11; i++) {
+		total[i-1]=[i, gangseo[i-2], jeju[i-2], ule[i-2]]
+	}
+		total[0]=['일자', 'School', 'Jeju', 'Uleung'] //이렇게 추가하니 되네
+
+console.log(total);
+
+
+
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+
+
+  // 잘 안된것 해결방법
+  //1. total 이 배열, 배열안에 도시 3개 모두 배열. 근데
+  // ['일자', 'School Min', 'Jeju Min', 'ule Min'] 이건 그냥 넣고 total을 넣으니까 안된것
+  // total 0 번에 문자들도 추가시켜놔야 total 만 넣어도 되는것. 이미 123번 []전체가 배열로 감싸져있음
+  // 2. 아니면 문자들 다음에 total[0]..[1]..식으로 넣어주면 됨. 단 차트가 많으면 비효율적 아니겠냐
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(
+      total
+
+    );
+    // var data = google.visualization.arrayToDataTable([
+    //   ['일자', 'School Min', 'Jeju Min', 'ule Min'],
+    //   ['2', 1000, 400, 200],
+    //   ['3', 1170, -460, 250],
+    //   ['4', 660,  20, 300],
+    //   ['5', -1030, 540, 350]
+    // ]);
+
+    var options = {
+      chart: {
+        title: 'Min Temperature',
+        subtitle: '도시별 최저온도(2일 ~ 10일 후)',
+      }
+    };
+
+    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+
+}
+
+
+	});
+</script>
+
+</html>
+
+<!--
+	// $("#getWeather").click(function(){
+	// 	// console.log(jeju[0]);   //여기서 찍으면 가져오네
+  //
+  //
+	// 	var gangseo=[]
+	// 	$.ajax({
+	// 	  url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+	// 	  + "lat=" + 37.549858 + "&lon=" + 126.842354,
+	// 	  headers: {
+	// 	    appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+	// 	  },
+	// 	  success: function(data) {
+	// 			gangseo[0]=data.weather.minutely[0].station.name
+	// 			gangseo[1]=Number(data.weather.minutely["0"].temperature.tmin)
+	// 			gangseo[2]=Number(data.weather.minutely["0"].temperature.tmax)
+	// 			console.log(gangseo);
+	// 	}
+	// 	});
+  //
+	// 	var jeju=[]
+	// 	$.ajax({
+	// 		url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+	// 		+ "lat=" + 33.382784 + "&lon=" + 126.531610,
+	// 		headers: {
+	// 			appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+	// 		},
+	// 		success: function(data) {
+	// 			jeju[0]=data.weather.minutely[0].station.name
+	// 			jeju[1]=Number(data.weather.minutely["0"].temperature.tmin)
+	// 			jeju[2]=Number(data.weather.minutely["0"].temperature.tmax)
+	// 			console.log(jeju);
+	// 		}
+  //
+	// 		});
+  //
+	// 	var ule=[]
+	// 	$.ajax({
+	// 		url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+	// 		+ "lat=" + 37.507390 + "&lon=" + 130.842840,
+	// 		headers: {
+	// 			appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+	// 		},
+	// 		success: function(data) {
+	// 			ule[0]=data.weather.minutely[0].station.name
+	// 			ule[1]=Number(data.weather.minutely["0"].temperature.tmin)
+	// 			ule[2]=Number(data.weather.minutely["0"].temperature.tmax)
+	// 			console.log(ule);
+	// 		}
+	// 	});
+  //
+  //
+	// 	var total=[]
+	// 	total[0]=['City', 'Min Temperature', 'Max Temperature']
+	// 	total[1]=gangseo
+	// 	total[2]=jeju
+	// 	total[3]=ule
+	// 	console.log(total);
+  //
+	// 	google.charts.load('current', {packages: ['corechart', 'bar']});
+	// 	google.charts.setOnLoadCallback(drawMultSeries);
+  //
+	// 	function drawMultSeries() {
+	// 	      var data = google.visualization.arrayToDataTable(
+	// 	        total
+	// 	      );
+  //
+	// 	      var options = {
+	// 	        title: '지역별 최고, 최저기온',
+	// 	        chartArea: {width: '50%'},
+	// 	        hAxis: {
+	// 	          title: '기온',
+	// 	          minValue: 0
+	// 	        },
+	// 	        vAxis: {
+	// 	          title: '도시명'
+	// 	        }
+	// 	      };
+  //
+	// 	      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+	// 	      chart.draw(data, options);
+	// 	    }
+  //
+	// }); -->

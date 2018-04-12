@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    .input{width: 90px;
+    }
+    .align-center{
+      padding: 10px;
+      padding-left: 300px;
+      border-style:solid;
+      border-width: 5px;
+      border-color: green;
+    }
+  </style>
+  <body>
+    <div class="align-center" >
+    경과시간: <span id="time"></span> <br>
+
+    <input type="button" class="input" id="orion"value="오리온">
+    현재수량: <span name="Quantity">0</span>
+    수량: <input type="text" id="orionQuantityText" size="3">
+    <input type="button" id="orionBuy"  value="매수">
+    <input type="button" id="orionSell" value="매도">
+    가격: <span id="orionPrice" name="price"></span>
+    <span name="PriceInD"></span>
+
+    <br>
+
+    <input type="button" class="input" id="samsung"value="삼성전자">
+    현재수량: <span name="Quantity">0</span>
+    수량: <input type="text" id="samQuantityText" size="3">
+    <input type="button" id="samBuy"  value="매수">
+    <input type="button" id="samSell" value="매도">
+    가격: <span id="samPrice" name="price"></span>
+    <span name="PriceInD"></span>
+    <br>
+
+
+    <input type="button" class="input" id="lg" value="LG전자">
+    현재수량: <span name="Quantity">0</span>
+    수량: <input type="text" id="lgQuantityText" size="3">
+    <input type="button" id="lgBuy"  value="매수">
+    <input type="button" id="lgSell" value="매도">
+    가격: <span id="lgPrice" name="price"></span>
+    <span name="PriceInD"></span>
+    <br>
+
+    <input type="button" class="input" id="skhi" value="SK하이닉스">
+    현재수량: <span name="Quantity">0</span>
+    수량: <input type="text" id="skhiQuantityText" size="3">
+    <input type="button" id="skhiBuy"  value="매수">
+    <input type="button" id="skhiSell" value="매도">
+    가격: <span id="skhiPrice" name="price"></span>
+    <span name="PriceInD"></span>
+    <br>
+
+    <input type="button" class="input" id="cell" value="셀트리온">
+    현재수량: <span name="Quantity">0</span>
+    수량: <input type="text" id="cellQuantityText" size="3">
+    <input type="button" id="cellBuy"  value="매수">
+    <input type="button" id="cellSell" value="매도">
+    가격: <span id="cellPrice" name="price"></span>
+    <span name="PriceInD"></span>
+    <br>
+  <div class="">
+    현재 잔고: <span name="balance">10000000</span> <br>
+    현재 주식가치: <span name="stockValue">0</span> <br>
+    현재 총자산: <span name="totalAsset">0</span><br>
+    <!-- test <span id="tes"></span> <br>
+    가치확인<input type="button" name="" id="test" value="테스트"> -->
+  </div>
+  </div>
+    <br>
+    <div id="chart_div"></div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+
+//body 부분
+var time=0
+var timer
+setInterval(function(){
+  time++
+  $("#time").html(time)
+  $("#orionPrice").html(orionNv)
+  $("#samPrice").html(samNv)
+  $("#lgPrice").html(lgNv)
+  $("#skhiPrice").html(skhiNv)
+  $("#cellPrice").html(cellNv)
+},1000);
+
+
+//증감표시
+  //초기 가격 저장(ajax로 딜레이 2초 후)
+var numberInD = []
+setTimeout(function(){
+  numberInD[0] = orionNv
+  numberInD[1] = samNv
+  numberInD[2] = lgNv
+  numberInD[3] = skhiNv
+  numberInD[4] = cellNv
+  console.log(numberInD);
+}, 2000)
+
+  //가격 증감 비교 함수
+        // 이건 왜안될까?
+// $("[name=PriceInD]")[i].innerText(stock-numberInD[i])
+// $("[name=PriceInD]")[i].html(stock-numberInD[i])
+        // 처음 한거
+// setInterval(function(){
+//   if (numberInD[0] != orionNv) {
+//     console.log(orionNv-numberInD[0])
+//     if ( orionNv-numberInD[0] > 0) {
+//       $("#orionPriceInD")["0"].style.color="blue"
+//       $("#orionPriceInD").html(orionNv-numberInD[0])
+//       numberInD[0] = orionNv
+//     }
+//     else {
+//       $("#orionPriceInD")["0"].style.color="red"
+//       $("#orionPriceInD").html(orionNv-numberInD[0])
+//       numberInD[0] = orionNv
+//     }
+//   }
+// },1000);
+// console.log($("#orionPriceInD"));
+
+
+var InD =function(i, stock){
+  if (numberInD[i] != stock) {
+    console.log(stock-numberInD[i])
+    if ( stock-numberInD[i] > 0) {
+      $("[name=PriceInD]")[i].style.color="blue"
+      $("[name=PriceInD]")[i].innerText = stock-numberInD[i]
+      numberInD[i] = stock
+    }
+    else {
+      $("[name=PriceInD]")[i].style.color="red"
+      $("[name=PriceInD]")[i].innerText = stock-numberInD[i]
+      numberInD[i] = stock
+    }
+  }
+  else{
+    $("[name=PriceInD]").innerText = stock-numberInD[i]
+  }
+};
+
+//오리온 증감 비교
+setInterval(function(){
+  InD(0,orionNv)
+},1000)
+//삼성 증감 비교
+setInterval(function(){
+  InD(1,samNv)
+},1000)
+//lg 증감 비교
+setInterval(function(){
+  InD(2,lgNv)
+},1000)
+//sk하이닉스 증감 비교
+setInterval(function(){
+  InD(3,skhiNv)
+},1000)
+//셀트리온 증감 비교
+setInterval(function(){
+  InD(4 ,cellNv)
+},1000)
+
+
+
+
+
+
+// 현재주식가치 버튼으로 테스트해본거
+  $("#test").click(function(){
+    var sum=0
+    for (var i = 0; i < $("[name=price]").length; i++) {
+        sum = sum +  (Number($("[name=Quantity]")[i].innerText) * $("[name=price]")[i].innerText);
+      }
+      // console.log($("[name=price]"));   //length 5개다!
+      // console.log($("[name=price]").length); //5개 확인 된다
+      console.log(sum);
+      // $("[name=stockValue]")[0].innerText = sum
+      $("#tes").html( sum )
+  })
+
+
+// 현재 주식가치 , 현재 총자산
+setInterval(function(){
+  var sum=0  //새롭게 계산한 값으로 계속 갱신 해야 하니, 반복할때마다, 0으로 초기화시켜야함
+  for (var i = 0; i < $("[name=price]").length; i++) {
+    sum = sum +  (Number($("[name=Quantity]")[i].innerText) * $("[name=price]")[i].innerText);
+  }
+  console.log(sum);
+  $("[name=stockValue]").html(sum)
+  $("[name=totalAsset]").html(sum + Number($("[name=balance]").html() ) )
+  // $("[name=stockValue]")[0].innerText = sum
+  // $("[name=totalAsset]")[0].innerText = sum + Number($("[name=balance]")["0"].innerText)
+
+},1000);
+
+
+// 매수 공통 함수
+  var buy = function(stock,i){
+  console.log(stock);
+  var total=0
+  total= $("#"+stock).val() * Number($("[name=price]")[i].innerText);
+
+  if ($("[name=balance]")[0].innerText < total ) {
+    alert("현재 잔고가 부족합니다. 주문금액:" +total)
+  }
+  else {
+    console.log(total);
+    //현재잔고 = 현재잔고 - 매수금액
+    $("[name=balance]")[0].innerText = Number($("[name=balance]")[0].innerText) - total
+    // 현재수량 = 현재수량 + 매수수량
+    $("[name=Quantity]")[i].innerText = Number($("[name=Quantity]")[i].innerText) + Number($("#"+stock).val())
+  }
+  }
+// 매도 공통 함수
+  var sell = function(stock,i){
+  if ($("[name=Quantity]")[i].innerText < Number($("#"+stock).val()))  {
+    alert("수량이 부족합니다.")
+  }
+  else {
+    total= $("#"+stock).val() * $("[name=price]")[i].innerText;
+    console.log(total);
+      //현재잔고 = 현재잔고 + 매도금액
+    $("[name=balance]")["0"].innerText = Number($("[name=balance]")["0"].innerText) + total
+      // 현재수량 = 현재수량 - 매도수량
+    $("[name=Quantity]")[i].innerText = Number($("[name=Quantity]")[i].innerText) - Number($("#"+stock).val())
+  }
+  }
+
+
+  // 매수 매도 버튼 클릭 이벤트
+  console.log(document.getElementsByName('price'));  //name으로 해야하는듯
+  console.log($("[name=price]")["0"].innerText);     // name jqueey
+
+  //오리온
+    //매수
+  $("#orionBuy").click(function(){
+    buy("orionQuantityText", 0)
+  })
+  // //예전 매수
+  // $("#orionBuy").click(function(){
+  //   total= $("#orionQuantityText").val() * $("[name=price]")["0"].innerText;
+  //   if ($("[name=balance]")["0"].innerText < total ) {
+  //     alert("현재 잔고가 부족합니다. 주문금액:" +total)
+  //   }
+  //   else {
+  //     console.log(total);
+  //     //현재잔고 = 현재잔고 - 매수금액
+  //     $("[name=balance]")["0"].innerText = Number($("[name=balance]")["0"].innerText) - total
+  //     // 현재수량 = 현재수량 + 매수수량
+  //     $("[name=Quantity]")["0"].innerText = Number($("[name=Quantity]")["0"].innerText) + Number($("#orionQuantityText").val())
+  //   }
+  // })
+  //매도
+
+  $("#orionSell").click(function(){
+    sell("orionQuantityText", 0)
+  })
+  // 예전 매도
+  // $("#orionSell").click(function(){
+  //   if ($("[name=Quantity]")["0"].innerText < Number($("#orionQuantityText").val()))  {
+  //     alert("수량이 부족합니다.")
+  //   }
+  //   else {
+  //     total= $("#orionQuantityText").val() * $("[name=price]")["0"].innerText;
+  //     console.log(total);
+  //       //현재잔고 = 현재잔고 + 매도금액
+  //     $("[name=balance]")["0"].innerText = Number($("[name=balance]")["0"].innerText) + total
+  //       // 현재수량 = 현재수량 - 매도수량
+  //     $("[name=Quantity]")["0"].innerText = Number($("[name=Quantity]")["0"].innerText) - Number($("#orionQuantityText").val())
+  //   }
+  // })
+
+
+  //삼성전자
+  $("#samBuy").click(function(){
+    buy("samQuantityText", 1)
+  })
+  $("#samSell").click(function(){
+    sell("samQuantityText", 1)
+  })
+  //lg
+  $("#lgBuy").click(function(){
+    buy("lgQuantityText", 2)
+  })
+  $("#lgSell").click(function(){
+    sell("lgQuantityText", 2)
+  })
+  //skhi
+  $("#skhiBuy").click(function(){
+    buy("skhiQuantityText", 3)
+  })
+  $("#skhiSell").click(function(){
+    sell("skhiQuantityText", 3)
+  })
+  //cell
+  $("#cellBuy").click(function(){
+    buy("cellQuantityText", 4)
+  })
+  $("#cellSell").click(function(){
+    sell("cellQuantityText", 4)
+  })
+
+
+
+
+
+
+//페이지 로딩 후 바로 실행되는 부분
+$(document).ready(function(){
+  // alert("Hello this is stocks world!");
+
+})
+
+// 시간 0-9 도 표시 함수
+var Zero = function(){
+  var h= new Date().getHours()
+  var m =addZero(new Date().getMinutes())
+  function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+  var s =addZero(new Date().getSeconds())
+  var st=""
+  return st = h+":"+m+":"+s
+};
+
+// google 차트 실행 함수
+var drawChart = function(totalData,stockItem){
+  google.charts.load('current', {packages: ['corechart', 'line']});
+  google.charts.setOnLoadCallback(drawCurveTypes);
+
+  function drawCurveTypes() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'X');
+        data.addColumn('number', '고가');
+        data.addColumn('number', '현재가');
+        data.addColumn('number', '저가');
+
+        data.addRows(
+          totalData
+        );
+        var options = {
+          hAxis: {
+            title: 'Time',
+            titleTextStyle: {
+              bold: true,
+              italic: true
+            }
+          },
+          vAxis: {
+            title: stockItem,
+            titleTextStyle: {
+              color: 'red',
+              fontSize: 20,
+              fontName: 'Arial',
+              bold: true,
+              italic: true
+            }
+          },
+          series: {
+            1: {curveType: 'function'}
+          },
+          backgroundColor: '#f1f8e9'
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+};
+
+//첫 그래프 오리온
+timer = setInterval(function(){
+  drawChart(orionTotalData,orionStockItem)
+},1000);
+
+// 버튼클릭 그래프 그리기 이벤트
+$("#orion").click(function(){
+  clearInterval(timer)
+  timer= setInterval(function(){
+    drawChart(orionTotalData,orionStockItem)
+  },1000);
+})
+$("#samsung").click(function(){
+  clearInterval(timer)
+  timer= setInterval(function(){
+    drawChart(samTotalData,samStockItem)
+  },1000);
+})
+$("#lg").click(function(){
+  clearInterval(timer)
+  timer= setInterval(function(){
+    drawChart(lgTotalData,lgStockItem)
+  },1000);
+})
+$("#skhi").click(function(){
+  clearInterval(timer)
+  timer= setInterval(function(){
+    drawChart(skhiTotalData,skhiStockItem)
+  },1000);
+})
+$("#cell").click(function(){
+  clearInterval(timer)
+  timer= setInterval(function(){
+    drawChart(cellTotalData,cellStockItem)
+  },1000);
+})
+
+
+
+
+//오리온
+  var orionTotalData =[]
+  var orionNv
+  var orionHv
+  var orionlv
+  var o
+  var orionStockItem=""
+  //이것도 반복되지만, 결국 각 종목 전역변수에 넣어서 차트를 그려야 하기에, 종목마다 만들어야할듯하다
+  // 파라미터? 로는 값이 들어가고, 어차피 전역변수 맞춰줄꺼면, 그게 그거같음
+  setInterval(function(){
+      timeHMS= Zero()
+      $.ajax({
+        url:'http://localhost/orion',
+        type:'GET',
+        data:"",
+        success:function(data){
+          o =data.result.areas["0"].datas["0"].cv
+
+          orionHv = data.result.areas["0"].datas["0"].hv
+          orionNv = data.result.areas["0"].datas["0"].nv
+          orionlv = data.result.areas["0"].datas["0"].lv
+          orionTotalData[orionTotalData.length] = [timeHMS,orionHv,orionNv,orionlv]
+          orionStockItem = data.result.areas["0"].datas["0"].nm
+          console.log(orionTotalData);
+          console.log(orionStockItem);
+          if (orionTotalData.length == 20) { //배열 10개가 되면 너무 많으니까
+            orionTotalData=orionTotalData.slice(1,orionTotalData.length)  //0번 배열 잘라 계속 10개 유지
+          }
+          }
+      })
+      // drawChart(orionTotalData,orionStockItem)
+  },1000);
+
+
+  //삼성전자
+  var samTotalData =[]
+  var samHv
+  var samNv
+  var samlv
+  var samStockItem=""
+  setInterval(function(){
+      timeHMS= Zero()
+      $.ajax({
+        url:'http://localhost/samsung',
+        type:'GET',
+        data:"",
+        success:function(data){
+          samHv = data.result.areas["0"].datas["0"].hv
+          samNv = data.result.areas["0"].datas["0"].nv
+          samlv = data.result.areas["0"].datas["0"].lv
+          samTotalData[samTotalData.length] = [timeHMS,samHv,samNv,samlv]
+          samStockItem = data.result.areas["0"].datas["0"].nm
+          console.log(samTotalData);
+          console.log(samStockItem);
+          if (samTotalData.length == 10) { //배열 10개가 되면 너무 많으니까
+            samTotalData=samTotalData.slice(1,samTotalData.length)  //0번 배열 잘라 계속 10개 유지
+          }
+          }
+      })
+  },1000);
+
+  //lg전자
+  var lgTotalData =[]
+  var lgHv
+  var lgNv
+  var lglv
+  var lgStockItem=""
+  setInterval(function(){
+      timeHMS= Zero()
+      $.ajax({
+        url:'http://localhost/lg',
+        type:'GET',
+        data:"",
+        success:function(data){
+          lgHv = data.result.areas["0"].datas["0"].hv
+          lgNv = data.result.areas["0"].datas["0"].nv
+          lglv = data.result.areas["0"].datas["0"].lglv
+          lgTotalData[lgTotalData.length] = [timeHMS,lgHv,lgNv,lglv]
+          lgStockItem = data.result.areas["0"].datas["0"].nm
+          console.log(lgTotalData);
+          console.log(lgStockItem);
+          if (lgTotalData.length == 10) {
+            lgTotalData=lgTotalData.slice(1,lgTotalData.length)
+          }
+          }
+      })
+  },1000);
+
+
+
+  //sk 하이닉스
+  var skhiTotalData =[]
+  var skhiHv
+  var skhiNv
+  var skhilv
+  var skhiStockItem=""
+  setInterval(function(){
+      timeHMS= Zero()
+      $.ajax({
+        url:'http://localhost/skhi',
+        type:'GET',
+        data:"",
+        success:function(data){
+          skhiHv = data.result.areas["0"].datas["0"].hv
+          skhiNv = data.result.areas["0"].datas["0"].nv
+          skhilv = data.result.areas["0"].datas["0"].skhilv
+          skhiTotalData[skhiTotalData.length] = [timeHMS,skhiHv,skhiNv,skhilv]
+          skhiStockItem = data.result.areas["0"].datas["0"].nm
+          console.log(skhiTotalData);
+          console.log(skhiStockItem);
+          if (skhiTotalData.length == 10) { //배열 10개가 되면 너무 많으니까
+            skhiTotalData=skhiTotalData.slice(1,skhiTotalData.length)  //0번 배열 잘라 계속 10개 유지
+          }
+          }
+      })
+  },1000);
+
+  // 셀트리온
+  var cellTotalData =[]
+  var cellHv
+  var cellNv
+  var celllv
+  var cellStockItem=""
+  setInterval(function(){
+      timeHMS= Zero()
+      $.ajax({
+        url:'http://localhost/cell',
+        type:'GET',
+        data:"",
+        success:function(data){
+          cellHv = data.result.areas["0"].datas["0"].hv
+          cellNv = data.result.areas["0"].datas["0"].nv
+          celllv = data.result.areas["0"].datas["0"].celllv
+          cellTotalData[cellTotalData.length] = [timeHMS,cellHv,cellNv,celllv]
+          cellStockItem = data.result.areas["0"].datas["0"].nm
+          console.log(cellTotalData);
+          console.log(cellStockItem);
+          if (cellTotalData.length == 10) { //배열 10개가 되면 너무 많으니까
+            cellTotalData=cellTotalData.slice(1,cellTotalData.length)  //0번 배열 잘라 계속 10개 유지
+          }
+          }
+      })
+  },1000);
+
+
+  // // 샘플
+  // var TotalData =[]
+  // var Hv
+  // var Nv
+  // var lv
+  // var StockItem=""
+  // setInterval(function(){
+  //     timeHMS= Zero()
+  //     $.ajax({
+  //       url:'http://localhost/skhi',
+  //       type:'GET',
+  //       data:"",
+  //       success:function(data){
+  //         Hv = data.result.areas["0"].datas["0"].hv
+  //         Nv = data.result.areas["0"].datas["0"].nv
+  //         lv = data.result.areas["0"].datas["0"].lv
+  //         TotalData[TotalData.length] = [timeHMS,Hv,Nv,lv]
+  //         StockItem = data.result.areas["0"].datas["0"].nm
+  //         console.log(TotalData);
+  //         console.log(StockItem);
+  //         if (TotalData.length == 10) { //배열 10개가 되면 너무 많으니까
+  //           TotalData=TotalData.slice(1,TotalData.length)  //0번 배열 잘라 계속 10개 유지
+  //         }
+  //         }
+  //     })
+  // },1000);
+
+
+  </script>
+
+</html>

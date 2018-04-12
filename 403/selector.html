@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style media="screen">
+
+      li{
+        color: red;
+
+      }
+      #javascript{
+        color: blue;
+      }
+      .css{
+        color: black;
+      }
+
+
+
+    /* !important */
+      h1{
+        color: red !important;
+
+      }
+      #javascript2{
+        color: blue;
+      }
+      .css2{
+        color: black;
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+  <!-- 선택자 우선순위
+  style  - id  - class - tag
+  -->
+    <li id="javascript" class="css" style="color:gold"> HELLO WORLD!</li>
+    <li id="javascript" class="css"> HELLO WORLD!</li>
+    <li  class="css"> HELLO WORLD!</li>
+    <li > HELLO WORLD!</li>
+
+
+
+    <!-- !important;  -->
+    <h1 id="javascript2" class="css2" style="color:gold"> HELLO WORLD2!</h1>
+
+
+  </body>
+</html>

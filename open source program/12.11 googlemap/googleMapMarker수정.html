@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 600px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <input type="button" name="" value="집" id="home">
+    <input type="button" name="" value="학교" id="school">
+    <input type="button" name="" value="제주도" id="jeju">
+    <input type="button" name="" value="을릉도" id="ule">
+    <input type="button" id="zoomin" value="줌인">
+    <input type="button" id="zoomout" value="줌아웃">
+
+    <br><br>
+    <div id="map"></div>
+
+    </body>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+    //동일한 코드가 반복되면 뭔가 잘못된것.
+    // 반복되는걸 함수 통해 간결하게 줄여야 나중에 수정할때도 편하다
+    var marker;
+    $("#home").click(function(){
+      set(37.508834,126.891282)
+      })
+    $("#school").click(function(){
+      set(37.549846,126.842286)
+      })
+    $("#jeju").click(function(){
+      set(33.371447, 126.540256)
+      })
+    $("#ule").click(function(){
+      set(37.488225, 130.886583)
+      })
+      $("#zoomin").click(function(){
+        map.setZoom(15);
+      });
+      $("#zoomout").click(function(){
+        map.setZoom(8);
+      });
+
+    var set = function(x, y){
+      if(marker){
+        marker.setMap(null);
+      }
+      marker = new google.maps.Marker({
+        position: {lat: x, lng: y},
+        map: map,
+      });
+      map.panTo({lat: x, lng: y});
+      map.setZoom(12);
+    }
+
+    function initMap() {
+      var home = {lat: 37.508834, lng: 126.891282};
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: home
+      });
+    }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAosw_HzMGD_qYxywTWHF8jkRZFi26eTfM&callback=initMap">
+    </script>
+
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table border="1" width="500" height="300">
+      <tr>
+
+        <td colspan="2">colspan 가로</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+
+      <tr>
+        <td rowspan="2">rowspan 세로</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+      </tr>
+
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>8</td>
+      </tr>
+    </table>
+<br><br><br>
+
+
+
+<!-- 가로 먼저 합치고 세로 합치는게 쉬움. -->
+    <table border="1" width="500" height="300">
+      <tr>
+
+        <td colspan="2"></td>
+        <td colspan="2" rowspan="2">2</td>
+
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <!-- <td colspan="2">5</td> -->
+
+      </tr>
+
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>8</td>
+        <td>8</td>
+      </tr>
+    </table>
+
+<br>
+
+
+
+
+
+ <!-- tr은 'table row'의 약자로, 테이블의 행
+ td는 'table data' 의 약자로 테이블 열 -->
+
+
+    <table border="1" width="500" height="300">
+      <!-- 1 -->
+      <tr>
+        <td colspan="3" rowspan="3"></td>
+        <td></td>
+        <td colspan="4"></td>
+
+      </tr>
+
+    <!-- 2 -->
+      <tr>
+
+        <td ></td>
+        <td rowspan="3"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+
+
+      <!-- 3-->
+      <tr>
+        <td></td>
+
+        <td></td>
+        <td colspan="2" rowspan="3"></td>
+
+
+      </tr>
+        <!-- 4 -->
+      <tr>
+        <td></td>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+
+      </tr>
+
+        <!-- 5 -->
+      <tr>
+        <td></td>
+        <td colspan="2"></td>
+
+        <td></td>
+        <td></td>
+        <td></td>
+
+
+      </tr>
+
+
+        <!-- 6 -->
+      <tr>
+        <td colspan="8"></td>
+
+      </tr>
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

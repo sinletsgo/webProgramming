@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" value="" id="id"placeholder="아이디 입력">
+    <input type="password" name="" value="" id="password"placeholder="비밀번호 입력" >
+    <input type="button" name="" value="로그인" id="sendData">
+
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  $("#sendData").click(function(){
+    $.ajax({
+      url:'http://localhost/queryLogin?id='
+      +$("#id").val() + "&pass=" + $("#password").val(),
+
+      success:function(data){
+        alert(data);
+    }})
+
+  })
+
+
+  </script>
+</html>

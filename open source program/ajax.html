@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" name=""id="ajaxTest" value="ajax테스트">
+    <input type="button" name="" id="ajaxTest2" value="ajax테스트2"> <br>
+    <input type="text" name="" value="" id="text"> <br>
+    <input type="text" name="" value="" id="array">
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  $("#ajaxTest").click(function(){
+
+
+    // $.ajax는 함수 . console.log 같은것. ajax2는 없다.
+    // ajax ()안은 객체다!  checked, value 값 가져올때처럼 단순한 배열이 아님.
+    // jquery ajax 구글에 치면 예제 다나옴
+    // 주소 쳐서 hello world 보는건 동기식.
+    // 아래 함수로 인해 ajax 버튼 클릭해서 data 보여주는건 비동기식 요청 및 응답에 결과
+
+    $.ajax({
+      url:'http://localhost/test',
+      type:'GET',
+      data:"",
+      success:function(data){
+        console.log(data);
+        $("#text").val(data)
+      }
+    })
+  })
+
+  $("#ajaxTest2").click(function(){
+    $.ajax({
+      url:'http://localhost/testArray',
+      type:'GET',
+      date:"",
+      success:function(data){
+        console.log(data);
+        $("#array").val(data)
+      }
+    })
+  })
+
+
+  </script>
+</html>

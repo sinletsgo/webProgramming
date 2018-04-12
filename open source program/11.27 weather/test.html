@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+  <script type="text/javascript">
+  var gangseo = []
+  $.ajax({
+    url:'http://apis.skplanetx.com/weather/forecast/6days?version=1&'
+    +"lon="+ 126.842354 + '&lat=' + 37.549858,
+    headers: {appKey : "602301f6-fd56-3bf9-bcf7-f884ce484040"},
+    success:function(data){
+      console.log(data);
+      var minDeg =[]
+      for (var i = 2; i < 11; i++) {
+        minDeg="tmin"+i+"day"
+        gangseo[i-2]=Number([data.weather.forecast6days["0"].temperature[minDeg]])
+      }
+      console.log(gangseo);
+    }
+  });
+  </script>
+</html>

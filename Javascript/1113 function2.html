@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" value="" id="a"> <br>
+    <input type="text" name="" value="" id="b">
+    <input type="button" name="" value="계산" onclick="calc()" id="button">
+    클릭했다!<input type="button" name="" value="날클릭해" onclick="calc2('클릭했어')" id="button">
+    <br><br>
+
+
+  </body>
+  <script type="text/javascript">
+  // 이렇게 하는게 아닌 onclick 이용해서 하는걸 밑에서
+
+  // var select=document.getElementById('button')
+  // select.addEventListener('click', function(){
+  //   var a=document.getElementById('a').value;
+  //   var b=document.getElementById('b').value;
+  //   console.log(Number(a)+Number(b));
+  //   console.log(Number(a)-Number(b));
+  //   console.log(Number(a)*Number(b));
+  //   console.log(Number(a)/Number(b));
+  // })
+
+
+  // fucntion 선언 다음과 같은 방법도 있다.
+  // var calc= function(){
+  //
+  // }
+    //
+    // function calc(){
+    //   var a=document.getElementById('a').value;
+    //   var b=document.getElementById('b').value;
+    //   console.log(Number(a)+Number(b));
+    //   console.log(Number(a)-Number(b));
+    //   console.log(Number(a)*Number(b));
+    //   console.log(Number(a)/Number(b));
+    // }
+
+
+
+    function calc(){
+      var a=Number(document.getElementById('a').value)
+      var b=Number(document.getElementById('b').value)
+
+      console.log(a+b);
+      console.log(a-b);
+      console.log(a*b);
+      console.log(a/b);
+    }
+
+
+    // 위에서 onclick="calc('aaa')"" 해준걸 a1에 대입. a1출력시 aaa나옴
+    function calc2(a){
+      console.log(a);
+    }
+
+
+
+
+
+  </script>
+</html>

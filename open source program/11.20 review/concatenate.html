@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <img src="http://mblogthumb3.phinf.naver.net/20150327_166/creatiger_1427382057779gm38a_JPEG/mediation_puzzle_2.jpg?type=w2" alt="" width="100" id="img">
+      <p id="text">안녕하세요?</p>
+    </div>
+    <input type="text" name="" value="" id="text1" placeholder="합칠 문자열 입력"> <br>
+    <input type="text" name="" value="" id="text2" placeholder="합칠 문자열 입력"> <br>
+    <input type="text" name="" value="" id="text3" placeholder="합칠 문자열 입력"> <br>
+    <input type="text" name="" value="" id="text4" placeholder="합칠 문자열 입력"> <br>
+    <input type="text" name="" value="" id="text5" placeholder="합칠 문자열 입력 후 Enter">
+    <input type="button" name="" value="합치기" id="button" onclick="con()"><br><br>
+    <input type="text" name="" value="" id="context">
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  function con(){
+    document.getElementById('text').innerHTML='합치다!';
+    document.getElementById("img").src="http://ualr.edu/law/files/2012/08/special-education-mediation.jpg";
+  }
+
+
+  $("#button").click(function(){
+    var url = 'http://localhost/concatenate?word1='+$("#text1").val()
+    +'&word2='+$("#text2").val()
+    +'&word3='+$("#text3").val()
+    +'&word4='+$("#text4").val()
+    +'&word5='+$("#text5").val();
+
+    $.ajax({
+      url:url,
+      success:function(data){
+        console.log(data);
+
+        $("#context").val(data)
+      }
+    })
+  })
+
+
+
+  $("#text5").keydown(function(key){
+    if (key.keyCode==13) {
+      $("#button").click()
+    }
+  })
+
+
+
+  </script>
+
+
+</html>

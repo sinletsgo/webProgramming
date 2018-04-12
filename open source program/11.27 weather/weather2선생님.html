@@ -1,0 +1,103 @@
+<!--codepen.io
+검색 => weather icons
+
+-->
+<html>
+<head>
+</head>
+<body>
+학교 <input type="radio" name="place">
+제주도<input type="radio" name="place">
+<input type="button" id=getWeather value="날씨정보" onclick=""><br>
+<div id="weatherArea" style="display: none;">
+현재기온 : <span id="tc"></span><br>
+최고기온 : <span id="tmax"></span><br>
+최저기온 : <span id="tmin"></span><br>
+하늘상태 : <span id="skyName"></span><br>
+    <!-- <div id="weatherIcon" class="weatherIcon" style="display: none">
+        <div id="whatWeather">
+            <div class="inner"></div>
+        </div>
+    </div>
+    <br> -->
+풍속 : <span id="wspd"></span>m/s<br>
+최근 1시간 강수량 : <span id="last1hour"></span><br>
+최근 24시간 강수량 : <span id="last24hour"></span><br>
+관측소 : <span id="stationName"></span><br>
+관측시간 : <span id="timeObservation"></span><br>
+</div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$("#getWeather").click(function(){
+
+		var lon, lat;
+		if(document.getElementsByName('place')[0].checked){
+			lat = 37.549858;
+			lon = 126.842354;
+    }
+    else if(document.getElementsByName('place')[1].checked){
+			lat = 33.382784;
+			lon = 126.531610;
+		}
+		else {
+    	alert("장소를 선택하세요");
+    	return;
+    }
+
+    $.ajax({
+        // url:'http://apis.skplanetx.com/weather/current/minutely?lon=' + lon + '&lat=' + lat + '&version=1',
+        url:'http://localhost/getWeather?lon=' + lon + '&lat=' + lat + '&version=1',
+        headers: {appKey : "1e46bb81-8f62-3356-a127-58649ca259fc"},
+        success:function(data){
+          $("#weatherArea").css({display:""});
+        	var weather = data.weather.minutely[0];
+
+          console.log(data);
+          console.log(weather);
+
+          $("#tc").html(weather.temperature.tc);
+          $("#tmax").html(weather.temperature.tmax);
+          $("#tmin").html(weather.temperature.tmin);
+          $("#skyName").html(weather.sky.name);
+          $("#wspd").html(weather.wind.wspd);
+          $("#last1hour").html(weather.rain.last1hour);
+          $("#last24hour").html(weather.rain.last24hour);
+          $("#stationName").html(weather.station.name);
+          $("#timeObservation").html(weather.timeObservation);
+
+
+          // var weatherClass = "";
+          // if(weather.sky.code=="SKY_A01"){
+          //   weatherClass = "sunny";
+          //   }
+          //   else if(weather.sky.code=="SKY_A02"){
+          //   weatherClass = "mostlysunny";
+          //   }
+          // else if(weather.sky.code=="SKY_A03"){
+          //   weatherClass = "mostlycloudy";
+          // }
+          // else if(weather.sky.code=="SKY_A07"){
+          //   weatherClass = "cloudy";
+          // }
+          // else if(weather.sky.code=="SKY_A04" || weather.sky.code=="SKY_A08" || weather.sky.code=="SKY_A10"){
+          //   weatherClass = "rain";
+          // }
+          // else if(weather.sky.code=="SKY_A05" || weather.sky.code=="SKY_A06" || weather.sky.code=="SKY_A09"){
+          //   weatherClass = "snow";
+          // }
+          // else if(weather.sky.code=="SKY_A11" || weather.sky.code=="SKY_A12" || weather.sky.code=="SKY_A13" || weather.sky.code=="SKY_A14"){
+          //   weatherClass = "tstorms";
+          // }
+          //
+          // $("#whatWeather").attr('class', weatherClass);
+          // $("#weatherIcon").css({display:""});
+
+
+        }
+    });
+	});
+
+</script>
+<style></style>
+</html>

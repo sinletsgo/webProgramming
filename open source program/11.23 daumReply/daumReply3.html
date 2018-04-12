@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <input type="button" id="reply1" value="기사1">
+  <input type="button" id="reply2" value="기사2">
+  <input type="button" id="reply3" value="기사3">
+  <input type="button" id="stoper" value="stoper">
+  <div id="title"></div>
+  <div id="replyListArea">
+  </div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+// 선생님 하신것
+
+// 굳이 callReply1,2,3 할필요는 없는듯. 시간이 아닌 내용 이니까.
+  var callReply1, callReply2, callReply3;
+
+  $("#reply1").click(function() {
+    stopAll();
+    callReply1 = setInterval(function() {
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/192979088/children?offset=0&limit=10&sort=LATEST',
+        success: function(data) {
+          console.log(data);
+          $("#title").html("<br>기사제목 : " + data[0].post.title + "<br><br>");
+          var appendReplies = ""
+          for (var i = 0; i < data.length; i++) {
+            appendReplies += "작성자 : " + data[i].user.displayName +
+              "<br>내용 : " + data[i].content +
+              "<br>작성일시 : " + data[i].createdAt + "<br><br>"
+          }
+
+          $("#replyListArea").html(appendReplies);
+          // $("#replyListArea").html("");
+          // for (var i = 0; i < data.length; i++) {
+          //   $("#replyListArea").append("작성자 : " + data[i].user.displayName +
+          //     "<br>내용 : " + data[i].content +
+          //     "<br>작성일시 : " + data[i].createdAt + "<br><br>")
+          // }
+
+
+        }
+      })
+    }, 1000);
+  });
+
+  $("#reply2").click(function() {
+    stopAll();
+    callReply2 = setInterval(function() {
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/192976845/children?offset=0&limit=10&sort=LATEST',
+        success: function(data) {
+          console.log(data);
+          $("#title").html("<br>기사제목 : " + data[0].post.title + "<br><br>");
+          var appendReplies = ""
+          for (var i = 0; i < data.length; i++) {
+            appendReplies += "작성자 : " + data[i].user.displayName +
+              "<br>내용 : " + data[i].content +
+              "<br>작성일시 : " + data[i].createdAt + "<br><br>"
+          }
+
+          $("#replyListArea").html(appendReplies);
+        }
+      })
+    }, 1000)
+  });
+
+  $("#reply3").click(function() {
+    stopAll();
+    callReply3 = setInterval(function() {
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/192973288/children?offset=0&limit=10&sort=LATEST',
+        success: function(data) {
+          console.log(data);
+          $("#title").html("<br>기사제목 : " + data[0].post.title + "<br><br>");
+          var appendReplies = ""
+          for (var i = 0; i < data.length; i++) {
+            appendReplies += "작성자 : " + data[i].user.displayName +
+              "<br>내용 : " + data[i].content +
+              "<br>작성일시 : " + data[i].createdAt + "<br><br>"
+          }
+
+          $("#replyListArea").html(appendReplies);
+        }
+      })
+    }, 1000)
+  });
+
+  $("#stoper").click(function(){
+    stopAll();
+  });
+
+  var stopAll = function(){
+    clearInterval(callReply1);
+    clearInterval(callReply2);
+    clearInterval(callReply3);
+  }
+</script>
+
+</html>

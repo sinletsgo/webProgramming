@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+
+ // console.log() 이것도 함수였다!
+  // 함수의 정의. 파라미터, 리턴값을 알아라!
+  // function 함수명(파라미터){
+  //   return 리턴값;
+  // }
+  //
+
+
+  var num1= Number(prompt("숫자를 입력하세요"))
+  var num2= Number(prompt("숫자를 입력하세요"))
+  calc(num1,num2);
+
+
+  // function calc(a1=num1,a2=num2)  이것과 같음.
+  function calc(a1,a2){
+    console.log(a1+a2)
+    console.log(a1-a2)
+    console.log(a1*a2)
+    console.log(a1/a2)
+  }
+
+
+
+
+
+  function calc2(){
+    return "리턴값"
+  }
+  console.log(calc2());
+
+
+
+
+
+  var num="abc"
+
+  calc3(num)
+  function calc3(num){
+    return "!234"
+  }
+  console.log(calc3());
+
+
+
+
+  </script>
+</html>

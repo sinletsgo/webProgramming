@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  더하기 <br>
+  <input type="text" id="plusNumber">
+  <input type="text" id="plusNumber2">
+  <input type="button" id="plusbutton" value="결과"> <br> 빼기 <br>
+  <input type="text" id="minusNumber">
+  <input type="text" id="minusNumber2">
+  <input type="button" id="minusbutton" value="결과"> <br> 곱하기 <br>
+  <input type="text" id="multiply">
+  <input type="text" id="multiply2">
+  <input type="button" id="multiplybutton" value="결과보기!"> <br> 나누기 <br>
+  <input type="text" id="division">
+  <input type="text" id="division2">
+  <input type="button" id="divisionbutton" value="결과보기!"> <br>
+</body>
+
+<script type="text/javascript">
+  // 더하기
+  var buttonSelect = document.getElementById('plusbutton');
+
+  buttonSelect.addEventListener('click', function() {
+    var number1 = document.getElementById('plusNumber').value;
+    var number2 = document.getElementById('plusNumber2').value;
+
+    if (Number(number1) + Number(number2) >= 10) {
+      console.log(Number(number1) + Number(number2), "10이상");
+    } else {
+      console.log(Number(number1) + Number(number2), "10미만");
+    }
+  });
+
+  // 빼기
+  var buttonSelect2 = document.getElementById('minusbutton');
+  buttonSelect2.addEventListener('click', function() {
+    var number3 = document.getElementById('minusNumber').value;
+    var number4 = document.getElementById('minusNumber2').value;
+
+    if (Number(number3) - Number(number4) >= 10) {
+      console.log(number3, "-", number4, "=", Number(number3) - Number(number4), "10이상 입니다.");
+    } else {
+      console.log(number3, "-", number4, "=", Number(number3) - Number(number4), "10 미만");
+    }
+  });
+  // 곱하기
+  var buttonSelect3 = document.getElementById('multiplybutton');
+  buttonSelect3.addEventListener('click', function() {
+    var number5 = document.getElementById('multiply').value;
+    var number6 = document.getElementById('multiply2').value;
+
+    if (Number(number5) * Number(number6) >= 10) {
+      console.log(Number(number5) * Number(number6), "10이상");
+    } else {
+      console.log(Number(number5) * Number(number6), "10미만");
+    }
+  });
+  // 나누기
+  var buttonSelect4 = document.getElementById('divisionbutton');
+  buttonSelect4.addEventListener('click', function() {
+    number7 = document.getElementById('division').value;
+    number8 = document.getElementById('division2').value;
+    if (Number(number7) / Number(number8) >= 10) {
+      console.log(Number(number7) / Number(number8), "10이상");
+    } else {
+      console.log(Number(number7) / Number(number8), "10이하");
+
+    }
+  });
+</script>
+
+
+
+
+</html>

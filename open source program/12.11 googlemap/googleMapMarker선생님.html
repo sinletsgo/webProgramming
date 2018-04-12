@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <input type="button" id="school" value="학교">
+    <input type="button" id="home" value="집">
+    <input type="button" id="jeju" value="제주도">
+    <input type="button" id="ulleung" value="울릉도">
+    <br><br>
+    <div id="map"></div>
+
+    <script>
+      var marker;
+      $("#school").click(function(){
+        setMarkerAndMap(37.549525, 126.842373);
+      });
+      $("#home").click(function(){
+        setMarkerAndMap(37.491075, 127.041918);
+      });
+      $("#jeju").click(function(){
+        setMarkerAndMap(33.371447, 126.540256);
+      });
+      $("#ulleung").click(function(){
+        setMarkerAndMap(37.488225, 130.886583);
+      });
+
+      var setMarkerAndMap = function(x, y){
+        if(marker){
+          marker.setMap(null);
+        }
+        marker = new google.maps.Marker({
+          position: {lat: x, lng: y},
+          map: map
+        });
+        map.panTo({lat: x, lng: y});
+        map.setZoom(8);
+      }
+
+      function initMap() {
+        var polytech = {lat: 37.549525, lng: 126.842373};
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: polytech
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_wgPt5Vjqs7ntB04n75aoB_97IQnfxgA&callback=initMap">
+    </script>
+  </body>
+</html>

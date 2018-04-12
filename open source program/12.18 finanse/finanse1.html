@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  // 네이버 주식데이터를 ajax로 못가져옴, 내 서버 라우터 하나 더 만들어야
+  // 그 서버 통해서 가져올수 있다.
+  //주식데이터 받아오면, 한글은 깨져서 나온다. 설치가 필요
+  // cmd 관리자권한으로 실행
+  // npm install iconv  오류나면
+  // npm install --global --production windows-build-tools
+  // npm install -- node-gyp
+  // 설치 후 app.js 에 var iconv..... 추가
+
+var totalData =[]
+var nv  // 현재가
+setInterval(function(){
+  //시간도 계속 갱신하려면 setInterval 안 바로 이곳에 넣어야함.
+  var h= new Date().getHours()
+  // var m =new Date().getMinutes()
+
+  //추가! 분과 초가 1-9 일떄 01,02,03... 0을 붙여주는 함수
+  var m =addZero(new Date().getMinutes())
+  function addZero(i) {
+    if (i < 10) {   //1-9 이면  "0"을 붙인다!
+        i = "0" + i;
+    }
+    return i;
+}
+  var s =addZero(new Date().getSeconds())
+  // var g= new Date()
+
+
+  var st=""
+  st = h+":"+m+":"+s
+
+    $.ajax({
+      url:'http://localhost/getFinanse',
+      type:'GET',
+      data:"",
+      success:function(data){
+        console.log(data);
+        // console.log(data.result.areas["0"].datas["0"].nv);
+        nv = data.result.areas["0"].datas["0"].nv
+        totalData[totalData.length] = [st,nv]   //totalData.length해주면 알아서 순서대로 빈 배열 찾아서 값넣음
+        console.log(totalData);
+        if (totalData.length == 10) { //배열 10개가 되면 너무 많으니까
+          totalData=totalData.slice(1,totalData.length)  //0번 배열 잘라 계속 10개 유지
+        }
+        }
+    })
+
+
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawCurveTypes);
+
+    function drawCurveTypes() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'X'); //string으로 해주면 문자 가능
+          data.addColumn('number', '가격');
+
+          data.addRows(totalData);
+          // data.addRows([
+          //   [st, 5],    [st, 10]
+          // ]);
+
+          var options = {
+            hAxis: {
+              title: 'Time'
+            },
+            vAxis: {
+              title: '오리온 주가'
+            },
+            backgroundColor: '#f1f8e9'
+
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+
+
+},1000);
+
+
+
+
+
+
+  </script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <button type="button" name="" id="listButton">목록 받아오기</button>
+    <ol type="1" id="ol">
+
+    </ol>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  $("#listButton").click(function(){
+    $.ajax({
+      url:'http://localhost/getStudents',
+      type:'GET',
+      data:"",
+      success:function(data){
+        console.log(data);
+        console.log(data.length);
+
+        for (var i = 0; i < data.length; i++) {
+          $("#ol").append("<li>" + data[i] +"</li>")
+        }
+      }
+    })
+
+
+
+  })
+
+
+
+  </script>
+</html>

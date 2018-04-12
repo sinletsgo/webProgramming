@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+  body {
+    background-color: black;
+    color: white;
+  }
+  h1 {color: white;}
+
+  </style>
+  <body>
+    <h1>Brithday Check</h1>
+    <!-- 중복선택 피하기 위해 name
+         독립적 구분하기 위해 value 값 줌  -->
+    1월<input type="radio" name="abc" value="1">
+    2월<input type="radio" name="abc" value="2">
+    3월<input type="radio" name="abc" value="3">
+    4월<input type="radio" name="abc" value="4">
+    5월<input type="radio" name="abc" value="5">
+    6월<input type="radio" name="abc" value="6"> <br>
+    7월<input type="radio" name="abc" value="7">
+    8월<input type="radio" name="abc" value="8">
+    9월<input type="radio" name="abc" value="9">
+    10월<input type="radio" name="abc" value="10">
+    11월<input type="radio" name="abc" value="11">
+    12월<input type="radio" name="abc" value="12">
+    <br>
+    <input type="text" name="aa" id="Text" value="">
+    <input type="button" name="" value="생일확인" onclick="birth()"><br><br>
+
+    <hr>
+
+    <h3>밥</h3>
+    <div class="" >
+      <img src="https://file.namu.moe/file/ede676da0490e5e3be22237154cf9c10def6aeca76539ee4743fd443133f0eac" alt="" width="75">
+      맨밥(1000원)<input type="radio" name="rice" value="1000"><br>
+    </div>
+    <img src="https://img.kr.news.samsung.com/kr/wp-content/uploads/2015/10/%ED%88%AC%EB%AA%A8%EB%A1%9C%EC%9A%B0%EC%97%90%EC%84%B8%EC%9D%B4%EC%98%81%EC%9B%85%EC%9D%98%EC%8B%9D%ED%83%812.jpg" alt="" width="75">
+    보리밥(3000원)<input type="radio" name="rice" value="3000">
+    비빔밥(5000원)<input type="radio" name="rice" value="5000">
+    <h3>반찬</h3>
+    소고기(2500원)<input type="radio" name="sidedish" value="2500">
+    돼지고기(1000원)<input type="radio" name="sidedish" value="1000">
+    닭고기(1500원)<input type="radio" name="sidedish" value="1500">
+    오리고기(2000원)<input type="radio" name="sidedish" value="2000">
+    <h3>국</h3>
+    미역국(1500원)<input type="radio" name="soup" value="1500">
+    된장국(1000원)<input type="radio" name="soup" value="1000"><br>
+
+    <input type="button" name="" value="계산" onclick="calcu()">
+    총계<input type="text" name="" id="sum" value="">
+
+  </body>
+
+  <script type="text/javascript">
+  // #Elements ~들이다.  여러개 배열로 가져옴 (12개)
+  //a=document.getElementsByName('aa').value  못 불러옴. 배열이니까 Value값이 없는것.
+  // document.getElementsByName('aa')[0].value 이렇게 하면 불러올순있음. tag로 하는게 좋다.
+  // 12개 배열 중 알고 싶은건, check가 되어있는 'value'을 불러오는 것이지.
+  // document.getElementById('Text').value 값을 출력해본걸 이젠 반대로 입력하는것
+  // value= ""   ""이 안에 값을 넣으면 입력 된 값이 나오겠지!
+  var birth = function(){
+    birthText = document.getElementsByName('abc')
+    console.log(birthText);
+    for (var i = 0; i < birthText.length; i++) {
+      if (birthText[i].checked==true) {
+        document.getElementById('Text').value="당신의 생일은 "+birthText[i].value+"월 입니다";
+      }
+    }
+  }
+
+
+// 변수는 var 써주는게 좋음. 메모리낭비 방지
+  // ricesum=0 초기값 0을 안해주면 라이스만 선택후 계산시 nan 발생
+  var calcu = function(){
+    var riceSum=0
+    rice=document.getElementsByName('rice')
+    console.log(rice);
+    for (var i = 0; i < rice.length; i++) {
+      if (rice[i].checked==true) {
+        riceSum=Number(rice[i].value)
+        console.log("밥값 "+riceSum)
+      }
+    }
+    var sideSum=0
+    sidedish=document.getElementsByName('sidedish')
+    for (var i = 0; i < sidedish.length; i++) {
+      if (sidedish[i].checked==true) {
+        sideSum=Number(sidedish[i].value)
+        console.log("반찬값 "+sideSum);
+      }
+    }
+    var soupSum=0
+    soup=document.getElementsByName('soup')
+    for (var i = 0; i < soup.length; i++) {
+      if (soup[i].checked==true) {
+        soupSum=Number(soup[i].value)
+        console.log("국값 "+soupSum);
+      }
+    }
+    var total=(riceSum+sideSum+soupSum)
+
+    document.getElementById('sum').value="총 가격은 "+total+"입니다"
+}
+
+
+
+  </script>
+</html>

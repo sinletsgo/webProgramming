@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ol id="subjectArea">
+      <li>HTML</li>
+      <li class="blue">CSS</li>
+      <li id="Green">JAVASCRIPT</li>
+      <li class="black">polytech</li>
+    </ol>
+    <input type="text" name="" value="" id="addText" placeholder="내용을 입력하세요">
+    <input type="button" name="" id="appendButton" value="맨 뒤에 내용추가">
+    <input type="button" name="" id="appendButton2" value="특정요소 뒤에주기">
+    <hr><br>
+
+    <input type="text" name="" value="" id="text1" placeholder="숫자입력하세요"><br>
+    <input type="text" name="" value="" id="text2" placeholder="숫자입력하세요">
+    <input type="button" name="" value="계산" id="sumButton">
+
+    <br><br>
+    <input type="text" name="" value="" class="plus"><br>
+    <input type="text" name="" value="" class="minus"><br>
+    <input type="text" name="" value="" class="multi"><br>
+    <input type="text" name="" value="" class="division"><br><br>
+
+    <div id="squre">
+      내 위에 마우스를 올리면!
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js">
+  </script>
+  <script>
+
+  $("li").css({color:"red"});
+  $(".blue").css({color:"blue"})
+  $("#Green").css({color:"green"})
+  $(".black").css({color:"black"});
+
+  // id 태그로 불러오는게 좋음.
+  $("#appendButton").click(function(){
+    $("#subjectArea").append("<li>"+ $("#addText").val() + "</li>")
+  });
+
+  $("#appendButton2").click(function(){
+    $(".blue").after("<li>" + $("#addText").val() + "</li>")
+  })
+
+
+
+  $("#sumButton").click(function(){
+    $(".plus").val("더하기:"+ ( Number( $("#text1").val() )+ Number( $("#text2").val() ) ) )
+    $(".minus").val("빼기:"+( Number( $("#text1").val() ) - Number( $("#text2").val() ) ) )
+    $(".multi").val("곱하기:"+( Number( $("#text1").val() ) * Number( $("#text2").val() ) ) )
+    $(".division").val("나누기:"+( Number( $("#text1").val() ) / Number( $("#text2").val() ) ) )
+  })
+
+
+
+// 엔터치면 아스키코드라고 컴퓨터가 엔터는 13으로 인식. 그러면 계산버튼을 클릭한 효과낸다는말
+// 이해하려고 하지말고 그냥 받아들여라.
+  $("#text1").keydown(function(key){
+    if (key.keyCode==13) {
+      $("#sumButton").click()
+    }
+  })
+  $("#text2").keydown(function(key){
+    if (key.keyCode==13) {
+      $("#sumButton").click()
+    }}
+  )
+// 2번 창뜨는건 대고, 나올때 중복되기떄문에.
+  $("#squre").css({width:"100px", height:"100px", border:"1px black solid"}).hover(function(){
+    alert("경고")
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</html>

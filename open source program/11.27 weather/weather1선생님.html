@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  학교 <input type="radio" name="place" value="">
+  제주도 <input type="radio" name="place" value="">
+  <input type="button" id="getWeather" value="날씨확인">
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+  $("#getWeather").click(function() {
+
+    var lat, lon;
+    if(document.getElementsByName('place')[0].checked){
+      lat = 37.549858;
+      lon = 126.842354;
+    }
+    else if(document.getElementsByName('place')[1].checked){
+      lat = 33.385941;
+      lon = 126.618017;
+    }
+    else{
+      alert("장소를 선택해주세요");
+      return;
+    }
+
+    $.ajax({
+      url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+      + "lat=" + lat + "&lon=" + lon,
+      headers: {
+        appKey: "1e46bb81-8f62-3356-a127-58649ca259fc"
+      },
+      success: function(data) {
+        console.log(data);
+        console.log(data.weather.minutely[0].station.name);
+      }
+    });
+
+  })
+</script>
+
+</html>

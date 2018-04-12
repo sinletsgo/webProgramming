@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <input type="button" name="" value="기사1" id="button">
+  <input type="button" name="" value="기사2" id="button2">
+  <input type="button" name="" value="기사3" id="button3">
+  <input type="button" name="" value="stoper" id="buttonEnd">
+
+  <div class="">
+    <hr>
+    <div id="titleArea">
+
+    </div>
+    <div class="" id="t">
+    </div>
+
+    <div class="" id="Area">
+    </div>
+    <hr>
+  </div>
+
+</body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+  var timer, t=0, t2=0, t3=0
+  $("#button").click(function() {
+    clearInterval(timer);
+
+    timer = setInterval(function() {
+
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/191986727/children?offset=0&limit=10&sort=LATEST',
+        type: 'GET',
+        data: "",
+        success: function(data) {
+          console.log(data);
+          console.log(data[0]);
+          var appendString = "";
+          $("#titleArea").html("<h3>" + "기사제목: " + data[0].post.title + "</h3>")
+
+
+          for (var i = 0; i < data.length; i++) {
+            // append로 하면 계속 밑에 붙음. 그래도 append 쓰려면
+            // $("#Area").html("") 이렇게 비워주고 붙이면 됨
+            appendString += "<li> <br>" +
+              "작성일시: " + data[i].createdAt + "<br>" +
+              "작성자: " + data[i].user.displayName + "<br> " +
+              "댓글내용: " + data[i].content +
+              "</li> <br><br><br>"
+          }
+          $("#Area").html(appendString);
+          $("#t").html(t);
+          t+=1
+        }
+      })
+
+    }, 1000);
+
+  });
+  $("#button2").click(function() {
+    clearInterval(timer);
+
+    timer = setInterval(function() {
+
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/192091750/children?offset=0&limit=10&sort=LATEST',
+        type: 'GET',
+        data: "",
+        success: function(data) {
+          console.log(data);
+          console.log(data[0]);
+          var appendString = "";
+          $("#titleArea").html("<h3>" + "기사제목: " + data[0].post.title + "</h3>")
+
+
+          for (var i = 0; i < data.length; i++) {
+            appendString += "<li> <br>" +
+              "작성일시: " + data[i].createdAt + "<br>" +
+              "작성자: " + data[i].user.displayName + "<br> " +
+              "댓글내용: " + data[i].content +
+              "</li> <br><br><br>"
+          }
+          $("#Area").html(appendString);
+          $("#t").html(t2);
+          t2+=1
+        }
+      })
+
+    }, 1000);
+
+  });
+  $("#button3").click(function() {
+    clearInterval(timer);
+
+    timer = setInterval(function() {
+
+      $.ajax({
+        url: 'http://comment.daum.net/apis/v1/comments/192097384/children?offset=0&limit=10&sort=LATEST',
+        type: 'GET',
+        data: "",
+        success: function(data) {
+          console.log(data);
+          console.log(data[0]);
+          var appendString = "";
+          $("#titleArea").html("<h3>" + "기사제목: " + data[0].post.title + "</h3>")
+
+
+          for (var i = 0; i < data.length; i++) {
+            appendString += "<li> <br>" +
+              "작성일시: " + data[i].createdAt + "<br>" +
+              "작성자: " + data[i].user.displayName + "<br> " +
+              "댓글내용: " + data[i].content +
+              "</li> <br><br><br>"
+          }
+          $("#Area").html(appendString);
+          $("#t").html(t3);
+          t3+=1
+        }
+      })
+
+    }, 1000);
+
+  });
+
+
+
+
+
+
+
+
+
+  // 잘못된 예
+  //
+  // $("#button3").click(function(){
+  //   clearInterval(timer);
+  //
+  //   timer=setInterval(function(){
+  //     $("#Area").html(
+  //
+  //       $.ajax({
+  //         url:'http://comment.daum.net/apis/v1/comments/192097384/children?offset=0&limit=10&sort=LATEST',
+  //         type:'GET',
+  //         data:"",
+  //         success:function(data){
+  //           console.log(data);
+  //           console.log(data[0]);
+  //           $("#Area").append("<h3>"+"기사제목: " + data[0].post.title + "</h3>")
+  //
+  //
+  //           for (var i = 0; i < data.length; i++) {
+  //             $("#Area").append("<li> <br>"
+  //             + "작성일시: " + data[i].createdAt + "<br>"
+  //             + "작성자: "+ data[i].user.displayName + "<br> "
+  //             + "<댓글내용>" + data[i].content
+  //             + "</li> <br><br><br>")
+  //           }
+  //         }
+  //       })
+  //     )
+  //   }, 3000)
+  // });
+
+
+
+
+
+
+
+  $("#buttonEnd").click(function() {
+    clearInterval(timer);
+
+  });
+
+
+
+  // $.ajax({
+  //   url:'http://comment.daum.net/apis/v1/posts/26653061/comments?parentId=0&offset=0&limit=30&sort=LATEST',
+  //   type:'GET',
+  //   data:"",
+  //   success:function(data){
+  //     console.log(data);
+  //     console.log(data[0]);
+  //     for (var i = 0; i < data.length; i++) {
+  //       $("#ul").append("<li> <br>"
+  //       + "작성일시: " + data[i].createdAt + "<br>"
+  //       + "작성자: "+ data[i].user.displayName + "<br> "
+  //       + "<댓글내용> <br> " + data[i].content
+  //       + "</li> <br><br><br>")
+  //     }
+  //   }
+  // })
+</script>
+
+</html>

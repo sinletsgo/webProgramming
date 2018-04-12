@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background-color: black;
+        color: white;
+
+      }
+
+    </style>
+  </head>
+  <body>
+    제주도<input type="radio" name="radio" value="제주도">
+    학교<input type="radio" name="radio" value="학교">
+    영등포<input type="radio" name="radio" value="영등포">
+    <button type="button" name="button" id="weatherButton">날씨정보</button>
+    <div id="t">
+
+
+    </div>
+    <h2 id="h"></h2>
+    <div id="div">
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  // sk planet developers 가입 후 weather 인증키 headers에 넣기
+  // 구글 지도에서 원하는 지역 우클릭, '이곳이 궁금한가요?' 위도 경도? 데이터 기억
+
+
+  //  내가 한것 복잡
+  $("#weatherButton").click(function(){
+
+
+    weather=document.getElementsByName('radio')
+    // console.log(weather);
+    weatherData=returnWeather(weather)
+    function returnWeather(w){
+      for (var i = 0; i < w.length; i++) {
+        if (w[i].checked ==true) {
+            return w[i].value
+          }
+        }
+      }
+
+
+      if (weatherData=="제주도") {
+        $.ajax({
+          url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+          +"lat="+ 33.500171 +"&lon="+ 126.531289,
+          headers: {
+            appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+          },
+          success:function(data){
+            console.log(data);
+            $("#h").html(data.weather.minutely["0"].station.name+" 지역!")
+            $("#div").html("현재기온: "+data.weather.minutely["0"].temperature.tc+"<br>"
+            +"최고기온: "+data.weather.minutely["0"].temperature.tmax+"<br>"
+            +"최저기온: "+data.weather.minutely["0"].temperature.tmin+"<br>"
+            +"하늘상태: "+data.weather.minutely["0"].sky.name +"<br><br>"
+            +"풍속: "+data.weather.minutely["0"].wind.wspd +"m/s<br>"
+            +"최근 1시간 강우량: "+data.weather.minutely["0"].rain.last1hour +"<br>"
+            +"최근 24시간 강우량: "+data.weather.minutely["0"].rain.last24hour +"<br>"
+            +"관측소: " +data.weather.minutely["0"].station.name +"<br>"
+            +"관측시간: " +data.weather.minutely["0"].timeObservation +"<br>"
+
+
+
+          )
+
+          }
+        })
+      }
+      else if (weatherData=="학교") {
+        $.ajax({
+          url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+          +"lat="+ 37.549896 +"&lon="+ 126.842262,
+          headers: {
+            appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+          },
+          success:function(data){
+            console.log(data);
+            $("#h").html(data.weather.minutely["0"].station.name+" 지역!")
+            $("#div").html("현재기온: "+data.weather.minutely["0"].temperature.tc+"<br>"
+            +"최고기온: "+data.weather.minutely["0"].temperature.tmax+"<br>"
+            +"최저기온: "+data.weather.minutely["0"].temperature.tmin+"<br>"
+            +"하늘상태: "+data.weather.minutely["0"].sky.name +"<br><br>"
+            +"풍속: "+data.weather.minutely["0"].wind.wspd +"m/s<br>"
+            +"최근 1시간 강우량: "+data.weather.minutely["0"].rain.last1hour +"<br>"
+            +"최근 24시간 강우량: "+data.weather.minutely["0"].rain.last24hour +"<br>"
+            +"관측소: " +data.weather.minutely["0"].station.name +"<br>"
+            +"관측시간: " +data.weather.minutely["0"].timeObservation +"<br>"
+          )
+          }
+        })
+      }
+      else if (weatherData=="영등포") {
+        $.ajax({
+          url:'http://apis.skplanetx.com/weather/current/minutely?version=1&'
+          +"lat="+ 37.515655 +"&lon="+ 126.907532,
+          headers: {
+            appKey: "2ae376fa-79fe-3fae-909f-41741ef22932"
+          },
+          success:function(data){
+            console.log(data);
+            $("#h").html(data.weather.minutely["0"].station.name+" 지역!")
+            $("#div").html("현재기온: "+data.weather.minutely["0"].temperature.tc+"<br>"
+            +"최고기온: "+data.weather.minutely["0"].temperature.tmax+"<br>"
+            +"최저기온: "+data.weather.minutely["0"].temperature.tmin+"<br>"
+            +"하늘상태: "+data.weather.minutely["0"].sky.name +"<br><br>"
+            +"풍속: "+data.weather.minutely["0"].wind.wspd +"m/s<br>"
+            +"최근 1시간 강우량: "+data.weather.minutely["0"].rain.last1hour +"<br>"
+            +"최근 24시간 강우량: "+data.weather.minutely["0"].rain.last24hour +"<br>"
+            +"관측소: " +data.weather.minutely["0"].station.name +"<br>"
+            +"관측시간: " +data.weather.minutely["0"].timeObservation +"<br>"
+          )
+          }
+        })
+      }
+
+
+
+    })
+
+  </script>
+</html>

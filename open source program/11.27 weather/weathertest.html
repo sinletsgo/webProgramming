@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" name="" value="가져오기" id="weatherButton">
+    <input type="radio" name="" value="123213" id="radio">
+    <select class="" name="se">
+      <option value="1" name="s">1</option>
+      <option value="2" name="s">2</option>
+      <option value="3" name="s">3</option>
+      <option value="4" name="s">4</option>
+      <option value="5" name="s">5</option>
+    </select>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+    // 교수님 컴에 요청을 보내서 받아오는건데,
+    // 내가 SK 플래닛에 요청해서 받아오는게 아니라,
+    // 교수님 컴에 요청하고, 교수님 컴에서
+    // weatherState 정해둔 규칙?에 따라 SK플래닛에 보내서 받아온걸
+    // 응답해 주는것
+
+    $("#weatherButton").click(function(){
+      console.log(document.getElementsByName('s')[0].selected);
+
+      var state
+      select=document.getElementsByName('s')
+      if (document.getElementsByName('s')[0].selected) {
+        state="weatherState=1"
+      }
+      else if (document.getElementsByName('s')[1].selected) {
+        state="weatherState=2"
+      }
+      else if (document.getElementsByName('s')[2].selected) {
+        state="weatherState=3"
+      }
+      else if (document.getElementsByName('s')[3].selected) {
+        state="weatherState=4"
+      }
+      else if (document.getElementsByName('s')[4].selected) {
+        state="weatherState=5"
+      }
+      console.log(state);
+
+
+
+
+
+    //   $.ajax({
+    //     url:'http://192.168.170.177/getWeather?version=1&'
+    //     +"lat="+33.500171
+    //     +"&lon="+126.531289
+    //     +"&appKey=2ae376fa-79fe-3fae-909f-41741ef22932"
+    //     // weatherState:1,2,3,4,5 중 선택
+    //     +"&weatherState=2"
+    //     +"&name=신성우",
+    //     success:function(data){
+    //       console.log(data);
+    //     }
+    // })
+  })
+
+
+
+  </script>
+</html>
