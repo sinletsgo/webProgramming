@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #member{
+        text-align: center;
+        font-size: 50px;
+        color: blue;
+      }
+      #name{
+        font-family: Arial;
+        font-style: italic;
+        color: green;
+      }
+      #id{
+        font-weight: 900;
+        color: blue;
+      }
+      .pass{
+        text-shadow: 7px -7px 5px black;
+      }
+      #email{
+        letter-spacing: 0.8em;
+        color: hotpink;
+      }
+      #sell{
+        background: lightblue;
+      }
+      #cert{
+        font-family: bold;
+        color: purple;
+
+      }
+      .center{
+        text-align: center;
+         
+        /* position: relative;
+        left: 50%; */
+
+      }
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="member">회원가입</div> <br><br>
+    <span id="name">이름</span> <input type="text" name="" value=""><br><br>
+    <span id="id">아이디</span> <input type="text" name="" value="">
+    <input type="button" name="" value="중복확인"><br><br>
+    <span class="pass">비밀번호</span> <input type="text" name="" value=""><br><br>
+    <span class="pass">비밀번호확인</span> <input type="text" name="" value=""><br><br>
+    <span id="email">이메일</span> <input type="text" name="" value=""><br><br>
+    <span >성별</span>
+    남<input type="radio" name="gender" value="">
+    여<input type="radio" name="gender" value=""><br><br>
+    <span id="sell">휴대폰(SKT,KT,LGT)</span>
+    <select class="" name="">
+      <option value="">SKT</option>
+      <option value="">KT</option>
+      <option value="">LGT</option>
+    </select>
+    <input type="text" name="" value="" placeholder="휴대폰 번호(-제외)">
+    <input type="button" name="" value="인증번호 받기"> <br><br>
+    <span id="cert">인증번호</span>
+    <input type="text" name="" value="">
+    <input type="button" name="" value="인증번호 확인">
+    <br><br>
+    <div class="center">
+      <button type="button" name="button" >가입</button>
+      <button type="button" name="button" >취소</button>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>중첩된 목록(스타일)</title>
+    <style media="screen">
+      .style01{
+        list-style-type: disc;
+      }
+
+      .style02{
+        list-style-type: circle;
+      }
+      .style03{
+        list-style-type: square;
+      }
+      .style04{
+        list-style-type: none;
+      }
+      .style05{
+        list-style-type: decimal;
+      }
+      .a{
+        list-style-type: disc;
+      }
+      .b{
+        list-style-type: decimal;
+      }
+      .d{
+        list-style-type: decimal;
+      }
+
+    </style>
+
+
+  </head>
+  <body>
+    <h3>중첩된 목록의 예(css사용)</h3>
+    <h4>다음은 동물의 종류를 나타냅니다.</h4>
+    <ul>
+      <li class="style01">사슴
+
+        <ul>
+
+          <li class="style02">꽃사슴
+            <ol>
+              <li class="style03">체중</li>
+              <li class="style04">길이</li>
+              <li class="style05">특징</li>
+            </ol>
+          </li>
+
+          <li class="style06">엘크사슴</li>
+
+          <li class="style06">사불상
+            <ul class="style07">
+              <li class="style03">체중</li>
+              <li class="style04">길이</li>
+              <li class="style05">특징</li>
+            </ul>
+          </li>
+
+        </ul>
+      </li>
+
+        <li class="style08">호랑이</li>
+
+        <li class="style09">기린
+          <ol>
+            <li>이광수</li>
+            <li>기린왕</li>
+          </ol>
+        </li>
+
+
+        <li>사람</li>
+          <ul>
+            <li>poly</li>
+              <ol>
+                <li class="a">검은색 원</li>
+                <li class="b">일반숫자</li>
+                <li class="c">조동</li>
+                <li>박승</li>
+                <li>최경</li>
+              </ol>
+            <li>가족</li>
+              <ul>
+                <li class="d">신</li>
+                <li>성</li>
+                <li>우</li>
+                <li>짱</li>
+                  <ol>
+                    <li>안</li>
+                    <li>녕</li>
+                    <li>!</li>
+                  </ol>
+                <li>^^</li>
+                  <ul>
+                    <li>^-^</li>
+                    <li>^*^</li>
+                    <li> :) </li>
+                    <li> happy </li>
+                      <ol>
+
+                      </ol>
+                  </ul>
+
+              </ul>
+          </ul>
+
+
+    </ul>
+  </body>
+</html>

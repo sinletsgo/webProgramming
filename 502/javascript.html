@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<div id="test">
+  hello world!
+</div>
+
+<span>
+  10보다 클까요?
+</span>
+<input type="text" name="" value="" id="number1">
+<input type="text" name="" value="" id="number2">
+
+<input type="button" name="" value="판독" id="button">
+
+<input type="text" name="" value="" id="resultBox">
+  </body>
+  <script type="text/javascript">
+
+    console.log(10+10);
+    console.log(100-60);
+    console.log(7*7);
+    console.log(20/3);
+  false
+
+// if는 true 냐 false 냐를 본다. 안에 계산결과는 상관없이 true냐만 보는것
+// true 가 근본적인 if문
+    if (true) {
+      console.log("true 입니다");
+    }
+  // || 이면 둘중 하나면 true니까, &&이면 둘다 true여야 실행된다
+    if (true || false) {
+      console.log("or이면 log!");
+    } else {
+      console.log("하하하하");
+    }
+
+  // button click 이벤트 기초
+  var buttonTest = document.getElementById('button');
+
+
+
+
+    var number1 = 0;
+    var number2 = 0;
+    var result = 0;
+    function returnCheckValue(){
+      number1 = document.getElementById('number1').value;
+      number2 = document.getElementById('number2').value;
+      result = Number(number1) + Number(number2)
+      if (result > 10) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
+
+    // 어떤 이벤트가 발생하는지 듣고 있는것~
+    buttonTest.addEventListener('click', function() {
+
+      var checkValue = returnCheckValue();
+      console.log(checkValue);
+
+      if (checkValue) {
+        console.log("10보다 큽니다");
+        document.getElementById('resultBox').value = "결과값:" + result;
+      } else if (checkValue == false) {
+        console.log("10보다 작군요..");
+        document.getElementById('resultBox').value = "결과값:" + result;
+      }
+    });
+
+
+  //
+  //     var number1 = document.getElementById('number1').value;
+  //     var number2 = document.getElementById('number2').value;
+  //     var result = Number(number1) +Number(number2)
+  //
+  //
+  //     if (result > 10) {
+  //       console.log("10보다 큽니다");
+  //       document.getElementById('result').value = "결과값:" +result;
+  //     }
+  //     else {
+  //       console.log("10보다 작군요");
+  //     }
+  // });
+
+
+  // 1~100 홀수출력  % 써서, 안 써서 22가지로
+
+  for (var i = 1; i <= 100; i++) {
+    if (i % 2 != 0) {
+      console.log(i);
+    }
+  }
+
+
+  for (var i = 1; i <= 100; i++) {
+    if (i % 2 == 1) {
+      console.log(i);
+    }
+  }
+
+  for (var i = 1; i <= 100; i=i+2) {
+      console.log(i);
+  }
+
+
+  var star = " "
+  for (var i = 1; i < 11; i++) {
+      star  = star + "*"
+      console.log(star);
+    }
+
+
+
+
+
+
+  for (var i = 1; i < 20; i= i+2) {
+    var star = ""
+    for (var j = 0; j < i; j++) {
+      star  = star + "★"
+    }
+    console.log(star);
+  }
+
+
+
+  </script>
+</html>
