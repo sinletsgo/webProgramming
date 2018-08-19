@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+    <select class="" id="context">
+        <option value="0" checked>안녕하세요</option>
+        <option value="1">반갑습니다</option>
+        <option value="2">감사합니다</option>
+        <option value="3">미안합니다</option>
+        <option value="4">얼마입니까</option>
+    </select>
+    <br>
+
+    언어 : 영어<input type="radio" name="lang"  value="0" checked>
+    일본어 <input type="radio" name="lang" value="1">
+    <input type="button" name="" value="번역" id="btnTranslate"> <br>
+
+    <div class="resultTextArea">
+      결과
+    </div>
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+
+
+  console.log(  $("#context") );
+  //Return the value attribute
+  console.log(  $("#context").val() );
+
+
+
+    // ($("[name = lang]") 접근연구
+  console.log( ($("[name = lang]")) );
+
+  $("#btnTranslate").click(function(){
+
+    var context = 0;
+
+    // console.log($("[name = context]")["0"]["0"].selected);
+    // console.log($("[name = context]")["0"]["0"].value);
+    var langValue = $(".test")
+    var lang= 0;
+
+    if ($("[name = lang]")[0].checked) {
+        lang = 0;
+    }else if ($("[name = lang]")[1].checked) {
+        lang = 1;
+    }
+
+  console.log(lang);
+
+
+
+    // if ($("[name = context]")["0"]["0"].selected) {
+    //     context = $("[name = context]")["0"]["0"].value
+    // } else if ($("[name = context]")["0"]["1"].selected) {
+    //   context = $("[name = context]")["0"]["1"].value
+    // } else if ($("[name = context]")["0"]["2"].selected) {
+    //   context = $("[name = context]")["0"]["2"].value
+    // }else if ($("[name = context]")["0"]["3"].selected) {
+    //   context = $("[name = context]")["0"]["3"].value
+    // }else if ($("[name = context]")["0"]["4"].selected) {
+    //   context = $("[name = context]")["0"]["4"].value
+    // }
+
+
+    console.log( $("#context").val() );
+
+
+      // query 스트링 연결 하는거 연습
+      // 마지막에 , 안찍어서.
+      // post 번호 바꿨으면 아래 ajax 에서도 60 붙여줘야
+
+      // $("#context").val() 아래에 바로 넣으면 되는걸 굳이 어렵게..
+      $.ajax({
+        url: "http://localhost:60/check?context=" + $("#context").val() + "&lang=" + lang,
+        // url: "http://localhost:60/test",
+        type:'GET',
+        data:"",
+        success:function(data){
+          console.log(data);
+
+        }
+      });
+
+
+
+
+
+  });
+
+
+
+  </script>
+</html>

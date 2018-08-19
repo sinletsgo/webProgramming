@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<div id="test">
+  hello world!
+</div>
+
+<span>
+  10보다 클까요?
+</span>
+<input type="text" name="" value="" id="number1">
+<input type="text" name="" value="" id="number2">
+
+<input type="button" name="" value="판독" id="button">
+
+<input type="text" name="" value="" id="resultBox">
+  </body>
+  <script type="text/javascript">
+
+
+  // for (var i = 1; i < 20; i= i+2) {
+  //   var star = ""
+  //   for (var j = 0; j < i; j++) {
+  //     star  = star + "★"
+  //   }
+  //   console.log(star);
+  // }
+  //
+  //
+  // var star2 = "";
+  // for (var i = 0; i < 8; i++) {
+  //   var star2="";
+  //   for (var j = 0; j < (i*2)+1; j++) {
+  //     star2+= "*";
+  //   }
+  //   console.log(star2);
+  // }
+
+  // for (var i = 19; i > 0; i= i-2) {
+  //   var star = ""
+  //   for (var j = 0; j < i; j++) {
+  //     star  = star + "★"
+  //   }
+  //   console.log(star);
+  // }
+
+  // for (var i = 8; i > 0; i--) {
+  //   star = ""
+  //   for (var j = 0; j< i*2-1; j++) {
+  //     star += "☆"
+  //   }
+  //   console.log(star);
+  // }
+  //
+  // for (var i = 0; i < 8; i++) {
+  //   star = ""
+  //   for (var j = 0; j< 15-i*2; j++) {
+  //     star += "*"
+  //   }
+  //   console.log(star);
+  // }
+
+
+
+  // for (var i = 2; i < 1000; i= i*i) {
+  //   console.log(i);
+  // }
+
+  for (var i = 0; i < 5; i++) {
+    for ( j = 3; j < i*2; j = j*1 +2) {
+      console.log(j);
+    }
+  }
+
+  // for (var i = 10; i < 22; i= i+3) {
+  //   for (var j = i; j < i+2; j=j+3) {
+  //     console.log(j);
+  //   }
+  // }
+
+
+
+// for (var i = 1; i < 65; i = i*2) {
+//   star = ""
+//   for ( j = 0; j < i ; j++) {
+//     star += "☆"
+//   }
+//   console.log(star);
+// }
+
+// 교수님 방법
+// for (var i = 0; i < 7; i++) {
+//   star = "☆"
+//   for ( j = 0; j < i ; j++) {
+//     star += star
+//   }
+//   console.log(star);
+// }
+
+
+
+//
+for (var i = 1; i < 10; i++) {
+  for (var j = 1; j <= i; j++) {
+    for (var c = 1; c < 10; c++) {
+      console.log(i + "*" + j + "*" + c + "=" + i * j * c);
+    }
+  }
+}
+
+
+// 1옆에 `` 안에 ${} 묶으면 변수로 인식해서 계산결과 출력 가능
+var a =10, b=20;
+console.log(`a+b= ${a+b}`);
+
+console.log(`a+b= (${a} + ${b})= ${a+b}`);
+
+
+
+
+
+  </script>
+</html>

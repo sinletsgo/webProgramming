@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table id="table" border="2">
+
+    </table>
+    <br>
+    <input type="button" name="" value="랜덤 자리 배치" id="button">
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  $("#button").click(function(){
+
+   $("#table").html("")
+
+    var random_text = ["채성은", "윤성호", "최경재", "이한민", "오미진", "정유석"
+  , "최동훈", "정경화","최민성","이은실","성한빈","김의진","조동역","이우석","하태양"
+  , "박승진", "정효재", "노영우", "김지성","이동근","최민한"
+  , "김도운", "이효재"];
+      function rndText(){
+         var result = Math.floor(Math.random()*(random_text.length));
+         return random_text[result];
+       }
+
+    var ranArr = [];
+       for(var i = 0; i < random_text.length; i++){
+             ranArr[i] = rndText();
+             // 사원번호 중복체크
+             for(var j = 0; j < i; j++ ){
+                 // 이전값과 비교하여 중복일경우 random 값 다시 생성
+                 if(ranArr[i] == ranArr[j]){
+                     i = i - 1;
+                     break;
+                 }
+             }
+         }
+      // console.log(ranArr);
+      // console.log(ranArr[1]);
+      // console.log(ranArr[1+1]);
+    var seat = 5;
+    for (var i = 0; i < seat; i++) {
+    if (i == 0) {
+        $("#table").append("<tr>"
+        + "<td> "+ ranArr[13] + "</td> "
+        + "<td> "+ ranArr[14] + "</td> "
+        + "<td> "+ ranArr[15] + "</td> "
+        + "<td> "+ ranArr[16] + "</td> "
+        + "<td> "+ ranArr[17] + "</td> "
+        + "<td> "+ ranArr[18]+ "</td> "
+        +"</tr>" )
+      }
+      else if (i == 1) {
+        $("#table").append("<tr>"
+        + "<td> "+ ranArr[0] + "</td> "
+        + "<td> "+ ranArr[1] + "</td> "
+        + "<td> "+ "신성우" + "</td> "
+        + "<td> "+ ranArr[2] + "</td> "
+        + "<td> "+ ranArr[3] + "</td> "
+        + "<td> "+ ranArr[4] + "</td> "
+        +"</tr>" )
+      } else if (i == 2) {
+        $("#table").append("<tr>"
+        + "<td> "+ "Tv" + "</td> "
+        + "<td> "+ ranArr[5] + "</td> "
+        + "<td> "+ ranArr[6]+ "</td> "
+        + "<td> "+ ranArr[7] + "</td> "
+        + "<td> "+ ranArr[8] + "</td> "
+        + "<td> "+ ranArr[9] + "</td> "
+        +"</tr>" )
+      } else if (i == 3) {
+        $("#table").append("<tr>"
+        + "<td> "+ ranArr[19] + "</td> "
+        + "<td> "+ "김강용" + "</td> "
+        + "<td> "+ "조정연" + "</td> "
+        + "<td> "+ ranArr[20] + "</td> "
+        + "<td> "+ ranArr[21] + "</td> "
+        + "<td> "+ ranArr[22]+ "</td> "
+        +"</tr>" )
+      } else if (i == 4) {
+        $("#table").append("<tr>"
+        + "<td> "+ "x" + "</td> "
+        + "<td> "+ ranArr[10] + "</td> "
+        + "<td> "+ "x" + "</td> "
+        + "<td> "+ "x" + "</td> "
+        + "<td> "+ ranArr[11] + "</td> "
+        + "<td> "+ ranArr[12] + "</td> "
+        +"</tr>" )
+      }
+
+    }
+
+    })
+
+  </script>
+</html>

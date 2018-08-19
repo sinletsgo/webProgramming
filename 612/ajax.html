@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>hello world</h1>
+    <input type="button" name="" value="ajax call" id="ajaxBtn">
+  </body>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+      //ajax? 비동기적인 웹 어플리케이션의 제작을 위해 아래와 같은 조합을 이용하는 웹 개발 기법
+      //원래는 웹 주소에 하나 하나 다 쳐서 요청하고 응답받았는데, 이제는 ajax로 code 내에서 request response를 하는 방식이 있다는것!
+      // 서버에서 보내준 file에서만 ajax로 req, res를 받을 수 있다. server에 규칙이다.
+      $("#ajaxBtn").click(function(){
+
+        $.ajax({
+          url: "http://localhost/test",
+          success: function(result){
+            console.log(result);
+           }});
+
+      })
+
+
+  
+
+
+    </script>
+
+</html>

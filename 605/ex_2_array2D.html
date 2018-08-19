@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+
+
+    // // 2중 배열 사용할때, 당연히 배열 안에 배열을 선언 하지 않으면 오류가 난다.
+    // var array2D_test = [];
+    // array2D_test[0] = [];
+    // array2D_test[1] = [];
+    // array2D_test[2] = [];  //주석처리하니 오류
+    // for (var i = 0; i < 3; i++) {
+    //   for (var j = 0; j < 3; j++) {
+    //     array2D_test[i][j] = "hello world"
+    //   }
+    // };
+    // console.log(array2D_test);
+    //
+
+
+
+    // [1,2,3,4,5],
+    // [6,7,8,9,10],
+    //...........
+    // var array2D_1 = [];
+    // var n = 1;
+    // for (var i = 0; i < 5; i++) {
+    //     array2D_1[i] = [];
+    //   for (var j = 0; j < 5; j++) {
+    //
+    //     //방법 1
+    //     array2D_1[i][j] = n;
+    //     n ++
+    //
+    //     // 방법2
+    //     array2D_1[i][j] = j+1 + (i*5)
+    //   }
+    // }
+    // console.log(array2D_1);
+    //
+
+    //
+    //
+    // //
+    // var array2D_2 = [];
+    // var n1 = 1;
+    // for (var i = 0; i < 5; i++) {
+    //     array2D_2[i] = [];
+    //   for (var j = 0; j < 5; j++) {
+    //     array2D_2[i][j] = n1;
+    //     n1+= 3
+    //   }
+    // }
+    // console.log(array2D_2);
+
+    //
+    // //
+    // var array2D_3 = [];
+    // for (var i = 0; i < 5; i++) {
+    //     array2D_3[i] = [];
+    //   for (var j = 0; j < 5; j++) {
+    //     array2D_3[i][j] = j*i;
+    //
+    //   }
+    // }
+    // console.log(array2D_3);
+    //
+    // //
+    var array2D_4 = [];
+    for (var i = 0; i < 5; i++) {
+        array2D_4[i] = [];
+      for (var j = 0; j < 5; j++) {
+        array2D_4[i][j] = "" + i + j;
+
+      }
+    }
+    console.log(array2D_4);
+
+
+
+
+
+
+  </script>
+</html>

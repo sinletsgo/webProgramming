@@ -79,7 +79,7 @@ app.get('/getLongestEmail', function(req, res) {
 
 
 
-var sql = 'INSERT INTO `test1` (`desc`) VALUES ("하하")';\
+var sql = 'INSERT INTO `test1` (`desc`) VALUES ("하하")';
 
 
 app.get('/insert', function(req, res) {

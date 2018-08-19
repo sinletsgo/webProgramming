@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" value="" placeholder="id" id="id">
+    <input type="text" name="" value="" placeholder="password" id="pass">
+    <button type="button" id="button">Login</button>
+    <div id="div">
+
+    </div>
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  var checkFnc = function(id, pass){
+    if ( id == "poly" &&
+        pass == "1234") {
+          console.log("로그인 성공");
+          // return "로그인 성공"
+    } else {
+      console.log("로그인 실패");
+    }
+
+  }
+
+      $("#button").click(function(){
+        var id = $("#id").val()
+        var pass =$("#pass").val()
+        // var result = checkFnc(id, pass);
+        // console.log(result);
+        checkFnc(id, pass);
+
+      })
+
+  </script>
+</html>

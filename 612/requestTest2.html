@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      <input type="text" name="" value="" id="text">
+      <button type="button" name="button" id="btn1">구입 가능 물품 확인</button>
+
+
+  </body>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+
+  $("#btn1").click(function(){
+
+      var price = $("#text").val()
+
+      $.ajax({
+        url: "http://localhost/check?price=" + price,
+
+        success: function(result){
+          console.log(result);
+        }
+      })
+  });
+
+
+  </script>
+</html>

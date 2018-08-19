@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+    지하철 1 <input type="radio" name="subway1" value="" checked> 없음 <input type="radio" name="subway1" value="" > <br>
+    지하철 2 <input type="radio" name="subway2" value=""> 없음 <input type="radio" name="subway2" value=""> <br>
+
+    버스 7777  <input type="radio" name="bus1" value="" checked> 없음 <input type="radio" name="bus1" value=""> <br>
+    버스 8888  <input type="radio" name="bus2" value=""> 없음 <input type="radio" name="bus2" value=""> <br>
+    버스 2222  <input type="radio" name="bus3" value=""> 없음 <input type="radio" name="bus3" value=""> <br>
+
+    <br>
+    <button type="button" name="button" id="Check">확인</button>
+    <br>
+
+
+
+  </body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+  console.log( $("[name = bus1]")[0].checked);
+  //
+  // $("#Check").click(function(){
+  //   if (
+  //     $("[name = subway1]")[0].checked == true
+  //     || $("[name = subway2]")[0].checked == true) {
+  //       if (  $("[name = bus1]")[0].checked == true
+  //        || $("[name = bus2]")[0].checked == true
+  //        || $("[name = bus3]")[0].checked == true
+  //       ){
+  //            console.log("귀가 가능");
+  //       }
+  //       else {
+  //         console.log("귀가 불가능");
+  //       }
+  //
+  //   } else {
+  //     console.log("귀가 불가능");
+  //   }
+  // })
+
+
+  $("#Check").click(function(){
+    if ( ( $("[name = bus1]")[0].checked == true
+         || $("[name = bus2]")[0].checked == true
+         || $("[name = bus3]")[0].checked == true )
+        &&
+          ($("[name = subway1]")[0].checked == true
+         || $("[name = subway2]")[0].checked == true) ){
+           console.log("귀가 가능");
+         }
+        else {
+          console.log("귀가 불가능");
+        }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</html>

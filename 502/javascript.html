@@ -26,6 +26,7 @@
     console.log(100-60);
     console.log(7*7);
     console.log(20/3);
+
   false
 
 // if는 true 냐 false 냐를 본다. 안에 계산결과는 상관없이 true냐만 보는것
@@ -96,42 +97,136 @@
 
   // 1~100 홀수출력  % 써서, 안 써서 22가지로
 
-  for (var i = 1; i <= 100; i++) {
-    if (i % 2 != 0) {
-      console.log(i);
+  // for (var i = 1; i <= 100; i++) {
+  //   if (i % 2 != 0) {
+  //     console.log(i);
+  //   }
+  // }
+  //
+  //
+  // for (var i = 1; i <= 100; i++) {
+  //   if (i % 2 == 1) {
+  //     console.log(i);
+  //   }
+  // }
+  //
+  // for (var i = 1; i <= 100; i=i+2) {
+  //     console.log(i);
+  // }
+  //
+  //
+  // var star = " "
+  // for (var i = 1; i < 11; i++) {
+  //     star  = star + "*"
+  //     console.log(star);
+  //   }
+  //
+  //
+  //
+  // for (var i = 1; i < 20; i= i+2) {
+  //   var star = ""
+  //   for (var j = 0; j < i; j++) {
+  //     star  = star + "★"
+  //   }
+  //   console.log(star);
+  // }
+
+
+  //
+  //
+  // var star2 = "";
+  // for (var i = 0; i < 8; i++) {
+  //   var star2="";
+  //   for (var j = 0; j < (i*2)+1; j++) {
+  //     star2+= "*";
+  //   }
+  //   console.log(star2);
+  // }
+
+
+  // for (var i = 19; i > 0; i= i-2) {
+  //   var star = ""
+  //   for (var j = 0; j < i; j++) {
+  //     star  = star + "★"
+  //   }
+  //   console.log(star);
+  // }
+
+  // for (var i = 8; i > 0; i--) {
+  //   star = ""
+  //   for (var j = 0; j< (i*2)-1; j++) {
+  //     star += "☆"
+  //   }
+  //   console.log(star);
+  // }
+  //
+  // for (var i = 0; i < 8; i++) {
+  //   star = ""
+  //   for (var j = 0; j< 15 -(i*2); j++) {
+  //     star += "*"
+  //   }
+  //   console.log(star);
+  // }
+
+
+
+
+
+  //
+  // for (var i = 2; i < 1000; i= i*i) {
+  //   console.log(i);
+  // }
+  // console.log("");
+  // for (var i = 0; i < 5; i++) {
+  //   for ( j = 3; j < i*2; j = j*1 +2) {
+  //     console.log(j);
+  //   }
+  // }
+  // console.log("");
+  // for (var i = 10; i < 22; i= i+3) {
+  //   for (var j = i; j < i+2; j=j+3) {
+  //     console.log(j);
+  //   }
+  // }
+
+
+//
+// for (var i = 1; i < 65; i = i*2) {
+//   star = ""
+//   for ( j = 0; j < i ; j++) {
+//     star += "☆"
+//   }
+//   console.log(star);
+// }
+//
+// // 교수님 방법
+// for (var i = 0; i < 7; i++) {
+//   star = "☆"
+//   for ( j = 0; j < i ; j++) {
+//     star += star
+//   }
+//   console.log(star);
+// }
+//
+
+
+//
+for (var i = 1; i < 10; i++) {
+  for (var j = 1; j <= i; j++) {
+    for (var c = 1; c < 10; c++) {
+      console.log(i + "*" + j + "*" + c + "=" + i * j * c);
     }
   }
+}
 
 
-  for (var i = 1; i <= 100; i++) {
-    if (i % 2 == 1) {
-      console.log(i);
-    }
-  }
+// 1옆에 `` 안에 ${} 묶으면 변수로 인식해서 계산결과 출력 가능
+var a =10, b=20;
+console.log(`a+b= ${a+b}`);
 
-  for (var i = 1; i <= 100; i=i+2) {
-      console.log(i);
-  }
+console.log(`a+b= (${a} + ${b})= ${a+b}`);
 
 
-  var star = " "
-  for (var i = 1; i < 11; i++) {
-      star  = star + "*"
-      console.log(star);
-    }
-
-
-
-
-
-
-  for (var i = 1; i < 20; i= i+2) {
-    var star = ""
-    for (var j = 0; j < i; j++) {
-      star  = star + "★"
-    }
-    console.log(star);
-  }
 
 
 
